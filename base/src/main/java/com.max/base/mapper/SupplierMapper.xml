@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.max.base.mapper.SupplierMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="SupplierResultMap" type="com.max.base.entity.Supplier">
+        <id column="supplier_id" property="supplierId" />
+        <result column="supplier_type_id" property="supplierTypeId" />
+        <result column="supplier_name" property="supplierName" />
+        <result column="private_key" property="privateKey" />
+        <result column="supplier_public_key" property="supplierPublicKey" />
+        <result column="merchant_no" property="merchantNo" />
+        <result column="host" property="host" />
+        <result column="version" property="version" />
+    </resultMap>
+    <resultMap id="SupplierDtoResultMap" type="com.max.base.dto.SupplierDto">
+                <id column="supplier_id" property="supplierId" />
+                <result column="supplier_type_id" property="supplierTypeId" />
+                <result column="supplier_name" property="supplierName" />
+                <result column="private_key" property="privateKey" />
+                <result column="supplier_public_key" property="supplierPublicKey" />
+                <result column="merchant_no" property="merchantNo" />
+                <result column="host" property="host" />
+                <result column="version" property="version" />
+    </resultMap>
+    <resultMap id="SupplierResponseDtoResultMap" type="com.max.base.dto.response.SupplierResponseDto">
+                <id column="supplier_id" property="supplierId" />
+                <result column="supplier_type_id" property="supplierTypeId" />
+                <result column="supplier_name" property="supplierName" />
+                <result column="private_key" property="privateKey" />
+                <result column="supplier_public_key" property="supplierPublicKey" />
+                <result column="merchant_no" property="merchantNo" />
+                <result column="host" property="host" />
+                <result column="version" property="version" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        supplier_id, supplier_type_id, supplier_name, private_key, supplier_public_key, merchant_no, host, version
+    </sql>
+
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.max.base.mapper.BankMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BankResultMap" type="com.max.base.entity.Bank">
+        <id column="id" property="id" />
+        <result column="bank_name" property="bankName" />
+        <result column="ico" property="ico" />
+    </resultMap>
+    <resultMap id="BankDtoResultMap" type="com.max.base.dto.BankDto">
+                <id column="id" property="id" />
+                <result column="bank_name" property="bankName" />
+                <result column="ico" property="ico" />
+    </resultMap>
+    <resultMap id="BankResponseDtoResultMap" type="com.max.base.dto.response.BankResponseDto">
+                <id column="id" property="id" />
+                <result column="bank_name" property="bankName" />
+                <result column="ico" property="ico" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, bank_name, ico
+    </sql>
+
+</mapper>

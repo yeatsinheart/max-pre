@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.max.base.mapper.ViewMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="ViewResultMap" type="com.max.base.entity.View">
+        <id column="view_id" property="viewId" />
+        <result column="view_type" property="viewType" />
+        <result column="view_title" property="viewTitle" />
+        <result column="view_title_type" property="viewTitleType" />
+        <result column="view_content" property="viewContent" />
+        <result column="view_content_type" property="viewContentType" />
+        <result column="view_jump" property="viewJump" />
+        <result column="view_jump_type" property="viewJumpType" />
+        <result column="view_topping" property="viewTopping" />
+        <result column="view_order" property="viewOrder" />
+        <result column="view_status" property="viewStatus" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+    <resultMap id="ViewDtoResultMap" type="com.max.base.dto.ViewDto">
+                <id column="view_id" property="viewId" />
+                <result column="view_type" property="viewType" />
+                <result column="view_title" property="viewTitle" />
+                <result column="view_title_type" property="viewTitleType" />
+                <result column="view_content" property="viewContent" />
+                <result column="view_content_type" property="viewContentType" />
+                <result column="view_jump" property="viewJump" />
+                <result column="view_jump_type" property="viewJumpType" />
+                <result column="view_topping" property="viewTopping" />
+                <result column="view_order" property="viewOrder" />
+                <result column="view_status" property="viewStatus" />
+                <result column="create_time" property="createTime" />
+                <result column="update_time" property="updateTime" />
+    </resultMap>
+    <resultMap id="ViewResponseDtoResultMap" type="com.max.base.dto.response.ViewResponseDto">
+                <id column="view_id" property="viewId" />
+                <result column="view_type" property="viewType" />
+                <result column="view_title" property="viewTitle" />
+                <result column="view_title_type" property="viewTitleType" />
+                <result column="view_content" property="viewContent" />
+                <result column="view_content_type" property="viewContentType" />
+                <result column="view_jump" property="viewJump" />
+                <result column="view_jump_type" property="viewJumpType" />
+                <result column="view_topping" property="viewTopping" />
+                <result column="view_order" property="viewOrder" />
+                <result column="view_status" property="viewStatus" />
+                <result column="create_time" property="createTime" />
+                <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        view_id, view_type, view_title, view_title_type, view_content, view_content_type, view_jump, view_jump_type, view_topping, view_order, view_status, create_time, update_time
+    </sql>
+
+</mapper>
