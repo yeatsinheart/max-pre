@@ -22,6 +22,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.constraints.NotNull;
 import java.io.IOException;
 
 @Slf4j
@@ -29,11 +30,12 @@ import java.io.IOException;
 public class ValidateController {
     @Autowired
     private RedisService redisService;
+    private static int codeLength = 4;
 
-    @ApiOperation(value = "/login/code", tags = {"账号密码登录：网页验证码"})
+    @ApiOperation(value = "/login/code", tags = {"登录图片验证码"})
     @RequestMapping("/login/code")
-    public Result login(LoginUserRequest login) {
-        String code = ImageCodeGenerator.generateVerifyCode(4);
+    public Result login(@NotNull String name) {
+        String code = ImageCodeGenerator.generateVerifyCode(codeLength);
         ServletOutputStream out = null;
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = requestAttributes.getRequest();
@@ -42,7 +44,7 @@ public class ValidateController {
             out = response.getOutputStream();
             int w = 200, h = 80;
             ImageCodeGenerator.outputImage(w, h, response.getOutputStream(), code);
-            redisService.set(RedisConstant.CODE_SEND_LOGIN + login.getName(), code, RedisConstant.CODE_VALID_TIME);
+            redisService.set(RedisConstant.CODE_SEND_LOGIN + name, code, RedisConstant.CODE_VALID_TIME);
             out.flush();
         } catch (Exception e) {
             log.error("获取图片验证码失败", e);
@@ -57,22 +59,22 @@ public class ValidateController {
         return ResultGenerator.genSuccessResult(code);
     }
 
-    @ApiOperation(value = "/login/phone/code", tags = {"手机短信登录：网页验证码"})
+    @ApiOperation(value = "/login/phone/code", tags = {"手机短信登录验证码"})
     @RequestMapping("/login/phone/code")
-    public Result loginphone(LoginUserRequest login, String code) {
+    public Result loginphone(@NotNull String name, String code) {
         //网页验证码
-        String pageCode = redisService.getResult(RedisConstant.CODE_SEND_LOGIN + login.getName(), String.class).getResult();
+        String pageCode = redisService.getResult(RedisConstant.CODE_SEND_LOGIN + name, String.class).getResult();
         if (StringUtils.isEmpty(pageCode)) {
             return ResultGenerator.genFailResult(ResultCode.VALIDATAE_CODE_EXPIRED);
         }
         //短信验证码
         if (StringUtils.isNotBlank(code) && code.equals(pageCode)) {
-            String phoneCode = redisService.getResult(RedisConstant.SMS_CODE_SEND_LOGIN + login.getName(), String.class).getResult();
+            String phoneCode = redisService.getResult(RedisConstant.SMS_CODE_SEND_LOGIN + name, String.class).getResult();
             if (StringUtils.isNotBlank(phoneCode)) {
                 return ResultGenerator.genFailResult(ResultCode.PHONE_VALIDATAE_CODE_SENDED);
             }
-            String phone =  ImageCodeGenerator.generateVerifyCode(4);
-            redisService.set(RedisConstant.SMS_CODE_SEND_LOGIN + login.getName(), phone, RedisConstant.SMS_CODE_SEND_GAP_TIME);
+            String phone =  ImageCodeGenerator.generateVerifyCode(codeLength);
+            redisService.set(RedisConstant.SMS_CODE_SEND_LOGIN + name, phone, RedisConstant.SMS_CODE_SEND_GAP_TIME);
             return ResultGenerator.genSuccessResult(code);
         } else {
             return ResultGenerator.genFailResult(ResultCode.INVALID_SMS_CODE);
@@ -81,30 +83,30 @@ public class ValidateController {
     }
 
 
-    @ApiOperation(value = "/signin/code", tags = {"账号注册：网页验证码"})
+    @ApiOperation(value = "/signin/code", tags = {"账号注册：图片验证码"})
     @RequestMapping("/signin/code")
-    public Result signin(LoginUserRequest login) {
-        String code =  ImageCodeGenerator.generateVerifyCode(4);
-        redisService.set(RedisConstant.CODE_SEND_SIGN + login.getName(), code, UserConstant.VALIDATE_REDIS_KEEP_TIME);
+    public Result signin(@NotNull String name) {
+        String code =  ImageCodeGenerator.generateVerifyCode(codeLength);
+        redisService.set(RedisConstant.CODE_SEND_SIGN + name, code, UserConstant.VALIDATE_REDIS_KEEP_TIME);
         return ResultGenerator.genSuccessResult(code);
     }
 
     @ApiOperation(value = "/signin/phone/code", tags = {"账号注册：短信验证码"})
     @RequestMapping("/signin/phone/code")
-    public Result signinphone(LoginUserRequest login, String code) {
+    public Result signinphone(@NotNull String name, String code) {
         //网页验证码
-        String pageCode = redisService.getResult(RedisConstant.CODE_SEND_SIGN + login.getName(), String.class).getResult();
+        String pageCode = redisService.getResult(RedisConstant.CODE_SEND_SIGN + name, String.class).getResult();
         if (StringUtils.isEmpty(pageCode)) {
             return ResultGenerator.genFailResult(ResultCode.VALIDATAE_CODE_EXPIRED);
         }
         //短信验证码
         if (StringUtils.isNotBlank(code) && code.equals(pageCode)) {
-            String phoneCode = redisService.getResult(RedisConstant.SMS_CODE_SEND_SIGN + login.getName(), String.class).getResult();
+            String phoneCode = redisService.getResult(RedisConstant.SMS_CODE_SEND_SIGN + name, String.class).getResult();
             if (StringUtils.isNotBlank(phoneCode)) {
                 return ResultGenerator.genFailResult(ResultCode.PHONE_VALIDATAE_CODE_SENDED);
             }
-            String phone =  ImageCodeGenerator.generateVerifyCode(4);
-            redisService.set(RedisConstant.SMS_CODE_SEND_SIGN + login.getName(), phone, UserConstant.VALIDATE_REDIS_KEEP_TIME);
+            String phone =  ImageCodeGenerator.generateVerifyCode(codeLength);
+            redisService.set(RedisConstant.SMS_CODE_SEND_SIGN + name, phone, UserConstant.VALIDATE_REDIS_KEEP_TIME);
             return ResultGenerator.genSuccessResult(code);
         }
         return ResultGenerator.genFailResult(ResultCode.INVALID_SMS_CODE);
