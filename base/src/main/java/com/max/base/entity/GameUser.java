@@ -36,6 +36,8 @@ public class GameUser implements Serializable {
 
     @ApiModelProperty(value = "余额")
     private String gameBalance;
+    @ApiModelProperty(value = "服务提供ID")
+    private Integer supplierId;
 
 
 }

@@ -1,17 +1,17 @@
 /*
  Navicat MySQL Data Transfer
 
- Source Server         : 内网数据库
+ Source Server         : localhost_3306
  Source Server Type    : MySQL
  Source Server Version : 80017
- Source Host           : 172.16.9.83:3306
+ Source Host           : localhost:3306
  Source Schema         : max
 
  Target Server Type    : MySQL
  Target Server Version : 80017
  File Encoding         : 65001
 
- Date: 28/08/2019 19:47:23
+ Date: 28/08/2019 22:18:00
 */
 
 SET NAMES utf8mb4;
@@ -26,7 +26,7 @@ CREATE TABLE `bank`  (
   `bank_name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '支持的银行名称',
   `ico` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '银行图标',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '支持的银行' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '支持的银行' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of bank
@@ -42,7 +42,7 @@ CREATE TABLE `category_game`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '游戏分类ID',
   `category_name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '游戏分类名称',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '分类' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '分类' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of category_game
@@ -56,10 +56,11 @@ INSERT INTO `category_game` VALUES (2, '真人视讯');
 DROP TABLE IF EXISTS `game_user`;
 CREATE TABLE `game_user`  (
   `game_user_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '服务提供客户信息ID',
-  `user_id` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '用户ID',
+  `user_id` int(11) NOT NULL COMMENT '用户ID',
   `game_user_name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '服务提供客户名',
   `game_user_passwd` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '服务提供客户密码',
-  `game_balance` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '余额',
+  `game_balance` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '余额',
+  `supplier_id` int(11) NOT NULL COMMENT '服务提供ID',
   PRIMARY KEY (`game_user_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '游戏角色信息' ROW_FORMAT = Dynamic;
 
@@ -68,14 +69,14 @@ CREATE TABLE `game_user`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `log_bank`;
 CREATE TABLE `log_bank`  (
-  `log_bank_id` int(11) NOT NULL AUTO_INCREMENT,
-  `bank_id` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '支持的银行ID',
-  `user_id` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '使用人',
-  `bank_user_name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '持卡人姓名',
-  `bank_account` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '卡号',
-  `bank_type` int(1) NULL DEFAULT NULL COMMENT '类型：2充值成功 3绑定卡 1充值订单 ',
+  `log_bank_id` int(11) NOT NULL,
+  `bank_id` int(11) NOT NULL COMMENT '支持的银行ID',
+  `user_id` int(11) NOT NULL COMMENT '使用人',
+  `bank_user_name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '持卡人姓名',
+  `bank_account` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '卡号',
+  `bank_type` int(1) NOT NULL COMMENT '类型：2充值成功 3绑定卡 1充值订单 ',
   PRIMARY KEY (`log_bank_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户银行卡记录' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户银行卡记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for log_game

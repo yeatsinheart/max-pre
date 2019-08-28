@@ -38,7 +38,7 @@ public class WalletOrder implements Serializable {
     @ApiModelProperty(value = "订单号")
     private String walletOrderSeries;
 
-    @ApiModelProperty(value = "订单状态 0 处理中 1已结束")
+    @ApiModelProperty(value = "订单状态 0 处理中 1已结束 2成功")
     private Integer walletOrderStatus;
 
     @ApiModelProperty(value = "创建时间")

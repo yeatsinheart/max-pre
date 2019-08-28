@@ -28,7 +28,7 @@ public class LogBank implements Serializable {
     private String bankId;
 
     @ApiModelProperty(value = "使用人")
-    private String userId;
+    private Integer userId;
 
     @ApiModelProperty(value = "持卡人姓名")
     private String bankUserName;
