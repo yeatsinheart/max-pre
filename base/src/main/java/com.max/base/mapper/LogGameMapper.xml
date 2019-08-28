@@ -4,13 +4,13 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="LogGameResultMap" type="com.max.base.entity.LogGame">
-        <id column="id" property="id" />
+        <id column="id" property="id"/>
     </resultMap>
     <resultMap id="LogGameDtoResultMap" type="com.max.base.dto.LogGameDto">
-                <id column="id" property="id" />
+        <id column="id" property="id"/>
     </resultMap>
     <resultMap id="LogGameResponseDtoResultMap" type="com.max.base.dto.response.LogGameResponseDto">
-                <id column="id" property="id" />
+        <id column="id" property="id"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->

@@ -4,40 +4,40 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="WalletOrderResultMap" type="com.max.base.entity.WalletOrder">
-        <id column="order_id" property="orderId" />
-        <result column="user_id" property="userId" />
-        <result column="wallet_order_type" property="walletOrderType" />
-        <result column="wallet_order_money" property="walletOrderMoney" />
-        <result column="wallet_order_series" property="walletOrderSeries" />
-        <result column="wallet_order_status" property="walletOrderStatus" />
-        <result column="create_time" property="createTime" />
-        <result column="update_time" property="updateTime" />
-        <result column="deleted" property="deleted" />
-        <result column="log_bank_id" property="logBankId" />
+        <id column="order_id" property="orderId"/>
+        <result column="user_id" property="userId"/>
+        <result column="wallet_order_type" property="walletOrderType"/>
+        <result column="wallet_order_money" property="walletOrderMoney"/>
+        <result column="wallet_order_series" property="walletOrderSeries"/>
+        <result column="wallet_order_status" property="walletOrderStatus"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="deleted" property="deleted"/>
+        <result column="log_bank_id" property="logBankId"/>
     </resultMap>
     <resultMap id="WalletOrderDtoResultMap" type="com.max.base.dto.WalletOrderDto">
-                <id column="order_id" property="orderId" />
-                <result column="user_id" property="userId" />
-                <result column="wallet_order_type" property="walletOrderType" />
-                <result column="wallet_order_money" property="walletOrderMoney" />
-                <result column="wallet_order_series" property="walletOrderSeries" />
-                <result column="wallet_order_status" property="walletOrderStatus" />
-                <result column="create_time" property="createTime" />
-                <result column="update_time" property="updateTime" />
-                <result column="deleted" property="deleted" />
-                <result column="log_bank_id" property="logBankId" />
+        <id column="order_id" property="orderId"/>
+        <result column="user_id" property="userId"/>
+        <result column="wallet_order_type" property="walletOrderType"/>
+        <result column="wallet_order_money" property="walletOrderMoney"/>
+        <result column="wallet_order_series" property="walletOrderSeries"/>
+        <result column="wallet_order_status" property="walletOrderStatus"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="deleted" property="deleted"/>
+        <result column="log_bank_id" property="logBankId"/>
     </resultMap>
     <resultMap id="WalletOrderResponseDtoResultMap" type="com.max.base.dto.response.WalletOrderResponseDto">
-                <id column="order_id" property="orderId" />
-                <result column="user_id" property="userId" />
-                <result column="wallet_order_type" property="walletOrderType" />
-                <result column="wallet_order_money" property="walletOrderMoney" />
-                <result column="wallet_order_series" property="walletOrderSeries" />
-                <result column="wallet_order_status" property="walletOrderStatus" />
-                <result column="create_time" property="createTime" />
-                <result column="update_time" property="updateTime" />
-                <result column="deleted" property="deleted" />
-                <result column="log_bank_id" property="logBankId" />
+        <id column="order_id" property="orderId"/>
+        <result column="user_id" property="userId"/>
+        <result column="wallet_order_type" property="walletOrderType"/>
+        <result column="wallet_order_money" property="walletOrderMoney"/>
+        <result column="wallet_order_series" property="walletOrderSeries"/>
+        <result column="wallet_order_status" property="walletOrderStatus"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="deleted" property="deleted"/>
+        <result column="log_bank_id" property="logBankId"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->

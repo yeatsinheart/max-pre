@@ -4,34 +4,34 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="UserResultMap" type="com.max.base.entity.User">
-        <id column="id" property="id" />
-        <result column="name" property="name" />
-        <result column="passwd" property="passwd" />
-        <result column="nick" property="nick" />
-        <result column="create_time" property="createTime" />
-        <result column="balance" property="balance" />
-        <result column="status" property="status" />
-        <result column="withdraw_passwd" property="withdrawPasswd" />
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="passwd" property="passwd"/>
+        <result column="nick" property="nick"/>
+        <result column="create_time" property="createTime"/>
+        <result column="balance" property="balance"/>
+        <result column="status" property="status"/>
+        <result column="withdraw_passwd" property="withdrawPasswd"/>
     </resultMap>
     <resultMap id="UserDtoResultMap" type="com.max.base.dto.UserDto">
-                <id column="id" property="id" />
-                <result column="name" property="name" />
-                <result column="passwd" property="passwd" />
-                <result column="nick" property="nick" />
-                <result column="create_time" property="createTime" />
-                <result column="balance" property="balance" />
-                <result column="status" property="status" />
-                <result column="withdraw_passwd" property="withdrawPasswd" />
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="passwd" property="passwd"/>
+        <result column="nick" property="nick"/>
+        <result column="create_time" property="createTime"/>
+        <result column="balance" property="balance"/>
+        <result column="status" property="status"/>
+        <result column="withdraw_passwd" property="withdrawPasswd"/>
     </resultMap>
     <resultMap id="UserResponseDtoResultMap" type="com.max.base.dto.response.UserResponseDto">
-                <id column="id" property="id" />
-                <result column="name" property="name" />
-                <result column="passwd" property="passwd" />
-                <result column="nick" property="nick" />
-                <result column="create_time" property="createTime" />
-                <result column="balance" property="balance" />
-                <result column="status" property="status" />
-                <result column="withdraw_passwd" property="withdrawPasswd" />
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="passwd" property="passwd"/>
+        <result column="nick" property="nick"/>
+        <result column="create_time" property="createTime"/>
+        <result column="balance" property="balance"/>
+        <result column="status" property="status"/>
+        <result column="withdraw_passwd" property="withdrawPasswd"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->

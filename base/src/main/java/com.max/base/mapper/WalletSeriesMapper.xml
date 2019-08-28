@@ -4,25 +4,25 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="WalletSeriesResultMap" type="com.max.base.entity.WalletSeries">
-        <id column="id" property="id" />
-        <result column="user_id" property="userId" />
-        <result column="series" property="series" />
-        <result column="type" property="type" />
-        <result column="status" property="status" />
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="series" property="series"/>
+        <result column="type" property="type"/>
+        <result column="status" property="status"/>
     </resultMap>
     <resultMap id="WalletSeriesDtoResultMap" type="com.max.base.dto.WalletSeriesDto">
-                <id column="id" property="id" />
-                <result column="user_id" property="userId" />
-                <result column="series" property="series" />
-                <result column="type" property="type" />
-                <result column="status" property="status" />
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="series" property="series"/>
+        <result column="type" property="type"/>
+        <result column="status" property="status"/>
     </resultMap>
     <resultMap id="WalletSeriesResponseDtoResultMap" type="com.max.base.dto.response.WalletSeriesResponseDto">
-                <id column="id" property="id" />
-                <result column="user_id" property="userId" />
-                <result column="series" property="series" />
-                <result column="type" property="type" />
-                <result column="status" property="status" />
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="series" property="series"/>
+        <result column="type" property="type"/>
+        <result column="status" property="status"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->

@@ -4,16 +4,16 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="CategoryGameResultMap" type="com.max.base.entity.CategoryGame">
-        <id column="id" property="id" />
-        <result column="category_name" property="categoryName" />
+        <id column="id" property="id"/>
+        <result column="category_name" property="categoryName"/>
     </resultMap>
     <resultMap id="CategoryGameDtoResultMap" type="com.max.base.dto.CategoryGameDto">
-                <id column="id" property="id" />
-                <result column="category_name" property="categoryName" />
+        <id column="id" property="id"/>
+        <result column="category_name" property="categoryName"/>
     </resultMap>
     <resultMap id="CategoryGameResponseDtoResultMap" type="com.max.base.dto.response.CategoryGameResponseDto">
-                <id column="id" property="id" />
-                <result column="category_name" property="categoryName" />
+        <id column="id" property="id"/>
+        <result column="category_name" property="categoryName"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->

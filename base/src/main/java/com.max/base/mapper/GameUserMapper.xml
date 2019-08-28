@@ -4,25 +4,25 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="GameUserResultMap" type="com.max.base.entity.GameUser">
-        <id column="game_user_id" property="gameUserId" />
-        <result column="user_id" property="userId" />
-        <result column="game_user_name" property="gameUserName" />
-        <result column="game_user_passwd" property="gameUserPasswd" />
-        <result column="game_balance" property="gameBalance" />
+        <id column="game_user_id" property="gameUserId"/>
+        <result column="user_id" property="userId"/>
+        <result column="game_user_name" property="gameUserName"/>
+        <result column="game_user_passwd" property="gameUserPasswd"/>
+        <result column="game_balance" property="gameBalance"/>
     </resultMap>
     <resultMap id="GameUserDtoResultMap" type="com.max.base.dto.GameUserDto">
-                <id column="game_user_id" property="gameUserId" />
-                <result column="user_id" property="userId" />
-                <result column="game_user_name" property="gameUserName" />
-                <result column="game_user_passwd" property="gameUserPasswd" />
-                <result column="game_balance" property="gameBalance" />
+        <id column="game_user_id" property="gameUserId"/>
+        <result column="user_id" property="userId"/>
+        <result column="game_user_name" property="gameUserName"/>
+        <result column="game_user_passwd" property="gameUserPasswd"/>
+        <result column="game_balance" property="gameBalance"/>
     </resultMap>
     <resultMap id="GameUserResponseDtoResultMap" type="com.max.base.dto.response.GameUserResponseDto">
-                <id column="game_user_id" property="gameUserId" />
-                <result column="user_id" property="userId" />
-                <result column="game_user_name" property="gameUserName" />
-                <result column="game_user_passwd" property="gameUserPasswd" />
-                <result column="game_balance" property="gameBalance" />
+        <id column="game_user_id" property="gameUserId"/>
+        <result column="user_id" property="userId"/>
+        <result column="game_user_name" property="gameUserName"/>
+        <result column="game_user_passwd" property="gameUserPasswd"/>
+        <result column="game_balance" property="gameBalance"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->

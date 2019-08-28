@@ -4,34 +4,34 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="SupplierResultMap" type="com.max.base.entity.Supplier">
-        <id column="supplier_id" property="supplierId" />
-        <result column="supplier_type_id" property="supplierTypeId" />
-        <result column="supplier_name" property="supplierName" />
-        <result column="private_key" property="privateKey" />
-        <result column="supplier_public_key" property="supplierPublicKey" />
-        <result column="merchant_no" property="merchantNo" />
-        <result column="host" property="host" />
-        <result column="version" property="version" />
+        <id column="supplier_id" property="supplierId"/>
+        <result column="supplier_type_id" property="supplierTypeId"/>
+        <result column="supplier_name" property="supplierName"/>
+        <result column="private_key" property="privateKey"/>
+        <result column="supplier_public_key" property="supplierPublicKey"/>
+        <result column="merchant_no" property="merchantNo"/>
+        <result column="host" property="host"/>
+        <result column="version" property="version"/>
     </resultMap>
     <resultMap id="SupplierDtoResultMap" type="com.max.base.dto.SupplierDto">
-                <id column="supplier_id" property="supplierId" />
-                <result column="supplier_type_id" property="supplierTypeId" />
-                <result column="supplier_name" property="supplierName" />
-                <result column="private_key" property="privateKey" />
-                <result column="supplier_public_key" property="supplierPublicKey" />
-                <result column="merchant_no" property="merchantNo" />
-                <result column="host" property="host" />
-                <result column="version" property="version" />
+        <id column="supplier_id" property="supplierId"/>
+        <result column="supplier_type_id" property="supplierTypeId"/>
+        <result column="supplier_name" property="supplierName"/>
+        <result column="private_key" property="privateKey"/>
+        <result column="supplier_public_key" property="supplierPublicKey"/>
+        <result column="merchant_no" property="merchantNo"/>
+        <result column="host" property="host"/>
+        <result column="version" property="version"/>
     </resultMap>
     <resultMap id="SupplierResponseDtoResultMap" type="com.max.base.dto.response.SupplierResponseDto">
-                <id column="supplier_id" property="supplierId" />
-                <result column="supplier_type_id" property="supplierTypeId" />
-                <result column="supplier_name" property="supplierName" />
-                <result column="private_key" property="privateKey" />
-                <result column="supplier_public_key" property="supplierPublicKey" />
-                <result column="merchant_no" property="merchantNo" />
-                <result column="host" property="host" />
-                <result column="version" property="version" />
+        <id column="supplier_id" property="supplierId"/>
+        <result column="supplier_type_id" property="supplierTypeId"/>
+        <result column="supplier_name" property="supplierName"/>
+        <result column="private_key" property="privateKey"/>
+        <result column="supplier_public_key" property="supplierPublicKey"/>
+        <result column="merchant_no" property="merchantNo"/>
+        <result column="host" property="host"/>
+        <result column="version" property="version"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->

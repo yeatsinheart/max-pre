@@ -4,22 +4,22 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="LogWalletLimitResultMap" type="com.max.base.entity.LogWalletLimit">
-        <id column="log_wallet_limit_id" property="logWalletLimitId" />
-        <result column="user_id" property="userId" />
-        <result column="wallet_limit_id" property="walletLimitId" />
-        <result column="changed_value" property="changedValue" />
+        <id column="log_wallet_limit_id" property="logWalletLimitId"/>
+        <result column="user_id" property="userId"/>
+        <result column="wallet_limit_id" property="walletLimitId"/>
+        <result column="changed_value" property="changedValue"/>
     </resultMap>
     <resultMap id="LogWalletLimitDtoResultMap" type="com.max.base.dto.LogWalletLimitDto">
-                <id column="log_wallet_limit_id" property="logWalletLimitId" />
-                <result column="user_id" property="userId" />
-                <result column="wallet_limit_id" property="walletLimitId" />
-                <result column="changed_value" property="changedValue" />
+        <id column="log_wallet_limit_id" property="logWalletLimitId"/>
+        <result column="user_id" property="userId"/>
+        <result column="wallet_limit_id" property="walletLimitId"/>
+        <result column="changed_value" property="changedValue"/>
     </resultMap>
     <resultMap id="LogWalletLimitResponseDtoResultMap" type="com.max.base.dto.response.LogWalletLimitResponseDto">
-                <id column="log_wallet_limit_id" property="logWalletLimitId" />
-                <result column="user_id" property="userId" />
-                <result column="wallet_limit_id" property="walletLimitId" />
-                <result column="changed_value" property="changedValue" />
+        <id column="log_wallet_limit_id" property="logWalletLimitId"/>
+        <result column="user_id" property="userId"/>
+        <result column="wallet_limit_id" property="walletLimitId"/>
+        <result column="changed_value" property="changedValue"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->

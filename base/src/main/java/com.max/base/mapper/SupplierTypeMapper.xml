@@ -4,16 +4,16 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="SupplierTypeResultMap" type="com.max.base.entity.SupplierType">
-        <id column="supplier_type_id" property="supplierTypeId" />
-        <result column="supplier_type" property="supplierType" />
+        <id column="supplier_type_id" property="supplierTypeId"/>
+        <result column="supplier_type" property="supplierType"/>
     </resultMap>
     <resultMap id="SupplierTypeDtoResultMap" type="com.max.base.dto.SupplierTypeDto">
-                <id column="supplier_type_id" property="supplierTypeId" />
-                <result column="supplier_type" property="supplierType" />
+        <id column="supplier_type_id" property="supplierTypeId"/>
+        <result column="supplier_type" property="supplierType"/>
     </resultMap>
     <resultMap id="SupplierTypeResponseDtoResultMap" type="com.max.base.dto.response.SupplierTypeResponseDto">
-                <id column="supplier_type_id" property="supplierTypeId" />
-                <result column="supplier_type" property="supplierType" />
+        <id column="supplier_type_id" property="supplierTypeId"/>
+        <result column="supplier_type" property="supplierType"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
