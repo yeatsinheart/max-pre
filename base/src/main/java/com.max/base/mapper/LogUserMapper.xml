@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.max.base.mapper.LogUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="LogUserResultMap" type="com.max.base.entity.LogUser">
+        <id column="id" property="id" />
+    </resultMap>
+    <resultMap id="LogUserDtoResultMap" type="com.max.base.dto.LogUserDto">
+                <id column="id" property="id" />
+    </resultMap>
+    <resultMap id="LogUserResponseDtoResultMap" type="com.max.base.dto.response.LogUserResponseDto">
+                <id column="id" property="id" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id
+    </sql>
+
+</mapper>

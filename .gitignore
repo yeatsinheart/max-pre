@@ -1,0 +1,5 @@
+# Project exclude paths
+/base/target/
+/core/target/
+/event/target/
+/web/client/target/

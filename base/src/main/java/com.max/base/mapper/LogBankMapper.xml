@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.max.base.mapper.LogBankMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="LogBankResultMap" type="com.max.base.entity.LogBank">
+        <id column="log_bank_id" property="logBankId" />
+        <result column="bank_id" property="bankId" />
+        <result column="user_id" property="userId" />
+        <result column="bank_user_name" property="bankUserName" />
+        <result column="bank_account" property="bankAccount" />
+        <result column="bank_type" property="bankType" />
+    </resultMap>
+    <resultMap id="LogBankDtoResultMap" type="com.max.base.dto.LogBankDto">
+                <id column="log_bank_id" property="logBankId" />
+                <result column="bank_id" property="bankId" />
+                <result column="user_id" property="userId" />
+                <result column="bank_user_name" property="bankUserName" />
+                <result column="bank_account" property="bankAccount" />
+                <result column="bank_type" property="bankType" />
+    </resultMap>
+    <resultMap id="LogBankResponseDtoResultMap" type="com.max.base.dto.response.LogBankResponseDto">
+                <id column="log_bank_id" property="logBankId" />
+                <result column="bank_id" property="bankId" />
+                <result column="user_id" property="userId" />
+                <result column="bank_user_name" property="bankUserName" />
+                <result column="bank_account" property="bankAccount" />
+                <result column="bank_type" property="bankType" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        log_bank_id, bank_id, user_id, bank_user_name, bank_account, bank_type
+    </sql>
+
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.max.base.mapper.WalletLimitMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="WalletLimitResultMap" type="com.max.base.entity.WalletLimit">
+        <id column="wallet_limitid_id" property="walletLimitidId" />
+        <result column="wallet_limit_way" property="walletLimitWay" />
+        <result column="wallet_limit_value" property="walletLimitValue" />
+    </resultMap>
+    <resultMap id="WalletLimitDtoResultMap" type="com.max.base.dto.WalletLimitDto">
+                <id column="wallet_limitid_id" property="walletLimitidId" />
+                <result column="wallet_limit_way" property="walletLimitWay" />
+                <result column="wallet_limit_value" property="walletLimitValue" />
+    </resultMap>
+    <resultMap id="WalletLimitResponseDtoResultMap" type="com.max.base.dto.response.WalletLimitResponseDto">
+                <id column="wallet_limitid_id" property="walletLimitidId" />
+                <result column="wallet_limit_way" property="walletLimitWay" />
+                <result column="wallet_limit_value" property="walletLimitValue" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        wallet_limitid_id, wallet_limit_way, wallet_limit_value
+    </sql>
+
+</mapper>
