@@ -11,46 +11,15 @@ public interface UserConstant {
     String UID = "uid"; // 用户ID
     String USER_ID = "userId"; // 用户ID
     String IP = "ip"; // 用户ip
-    Integer USER_REDIS_KEEP_TIME=60*10;
-    Integer VALIDATE_REDIS_KEEP_TIME=60;
-    final class Status {
-        public final static int NEW = -1;// 上级创建，必须修改密码
-        public final static int NORMAL = 0;// 正常状态
-        public final static int LOCKED = 1;// 完全锁定
-        public final static int HALF_LOCKED = 2; //间接锁定
-        public final static int LOGIN_LOCKED = 4; //登录锁定
-        public final static int HALF_AND_LOGIN_LOCKED = 6; //间接锁定  AND  登录锁定
-    }
-
-    final class UserType {
-        public final static int PLAYER = 0;// 会员
-        public final static int PROXY = 1;// 代理
-    }
-
-    final class isFake {
-        public final static String NO = "0";// 真实用户
-        public final static String YES = "1";// 虚拟用户
-    }
-
-    /**
-     * 操作人类型 1公司,2代理
-     */
-    final class OperatorType {
-        public final static int COMPANY = 1;// 公司
-        public final static int PROXY = 2;// 代理
-    }
-
-    final class DomainType {
-        public final static int COMMON = 0;// 通用域名
-        public final static int SPECIAL = 1;// 专属域名
-    }
+    Integer USER_REDIS_KEEP_TIME = 60 * 10;
+    Integer VALIDATE_REDIS_KEEP_TIME = 60;
 
     enum UserOperateType {
         PROXY_CHANGE(UserOperateType.PROXY_CHANGE_OPTTYPE, "变更上级代理"),
         CONTACT_CHANGE(UserOperateType.CONTACT_CHANGE_OPTTYPE, "变更联系方式"),
         BANK_RESET(UserOperateType.BANK_RESET_OPTTYPE, "重置银行信息"),
         FULL_LOCK(UserOperateType.FULL_LOCK_OPTTYPE, "完全锁定"),
-        FULL_LOCK_DELETE_TELEPHONE_NUMBER_AND_EMAIL(UserOperateType.FULL_LOCK_DELETE_TELEPHONE_NUMBER_AND_EMAIL_OPTTYPE,"完全锁定"),
+        FULL_LOCK_DELETE_TELEPHONE_NUMBER_AND_EMAIL(UserOperateType.FULL_LOCK_DELETE_TELEPHONE_NUMBER_AND_EMAIL_OPTTYPE, "完全锁定"),
         HALF_LOCK(UserOperateType.HALF_LOCK_OPTTYPE, "间接锁定"),
         LOGIN_LOCK(UserOperateType.LOGIN_LOCK_OPTTYPE, "登录锁定"),
         HALF_AND_LOGIN_LOCK(UserOperateType.HALF_AND_LOGIN_LOCK_OPTTYPE, "间接锁定,登录锁定"),
@@ -93,22 +62,6 @@ public interface UserConstant {
         BETTING_BALANCE_REMOVE(UserOperateType.BETTING_BALANCE_REMOVE_OPTTYPE, "清除流水"),
         BETTING_BALANCE_RECOVER(UserOperateType.BETTING_BALANCE_RECOVER_OPTTYPE, "恢复流水");
 
-        private int optType;
-        private String desc;
-
-        private UserOperateType(int optType, String desc) {
-            this.optType = optType;
-            this.desc = desc;
-        }
-
-        public int getOptType() {
-            return optType;
-        }
-
-        public String getDesc() {
-            return desc;
-        }
-
         public static final int PROXY_CHANGE_OPTTYPE = 1;
         public static final int CONTACT_CHANGE_OPTTYPE = 2;
         public static final int BANK_RESET_OPTTYPE = 3;
@@ -130,7 +83,6 @@ public interface UserConstant {
         public static final int UN_LOGIN_LOCK_OPTTYPE = 19;
         public static final int CREDIT_CLEAR_DEDUCTION_OPTTYPE = 20;
         public static final int FULL_LOCK_DELETE_TELEPHONE_NUMBER_AND_EMAIL_OPTTYPE = 21;
-
         public static final int RESET_PASSWORD_OPTTYPE = 101;
         public static final int UPDATE_PASSWORD_OPTTYPE = 102;
         public static final int UPDATE_RECHARGE_OPTTYPE = 103;
@@ -138,12 +90,10 @@ public interface UserConstant {
         public static final int LOCK_ACCOUNT_OPTTYPE = 105;
         public static final int OPEN_WITHDRAW_OPTTYPE = 106;
         public static final int CLOSE_WITHDRAW_OPTTYPE = 107;
-
         //以下是资金流水审核的内容
         public static final int BETTING_BALANCE_ADJUSTMENT_OPTTYPE = 108;
         public static final int BETTING_BALANCE_REMOVE_OPTTYPE = 109;
         public static final int BETTING_BALANCE_RECOVER_OPTTYPE = 110;
-
         public static final int EDIT_PROFILE_OPTTYPE = 111;
         public static final int NEW_RECIPIENT_ADDRESS_OPTTYPE = 112;
         public static final int EDIT_RECIPIENT_ADDRESS_OPTTYPE = 113;
@@ -154,5 +104,51 @@ public interface UserConstant {
         public static final int UNTIED_BANK_CARD_OPTTYPE = 118;
         public static final int RESET_PASSWORD_MOBILE_OPTTYPE = 119;
         public static final int RESET_PASSWORD_EMAIL_OPTTYPE = 120;
+        private int optType;
+        private String desc;
+        private UserOperateType(int optType, String desc) {
+            this.optType = optType;
+            this.desc = desc;
+        }
+
+        public int getOptType() {
+            return optType;
+        }
+
+        public String getDesc() {
+            return desc;
+        }
+    }
+
+    final class Status {
+        public final static int NEW = -1;// 上级创建，必须修改密码
+        public final static int NORMAL = 0;// 正常状态
+        public final static int LOCKED = 1;// 完全锁定
+        public final static int HALF_LOCKED = 2; //间接锁定
+        public final static int LOGIN_LOCKED = 4; //登录锁定
+        public final static int HALF_AND_LOGIN_LOCKED = 6; //间接锁定  AND  登录锁定
+    }
+
+    final class UserType {
+        public final static int PLAYER = 0;// 会员
+        public final static int PROXY = 1;// 代理
+    }
+
+    final class isFake {
+        public final static String NO = "0";// 真实用户
+        public final static String YES = "1";// 虚拟用户
+    }
+
+    /**
+     * 操作人类型 1公司,2代理
+     */
+    final class OperatorType {
+        public final static int COMPANY = 1;// 公司
+        public final static int PROXY = 2;// 代理
+    }
+
+    final class DomainType {
+        public final static int COMMON = 0;// 通用域名
+        public final static int SPECIAL = 1;// 专属域名
     }
 }

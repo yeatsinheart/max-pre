@@ -6,7 +6,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- *md5工具类
+ * md5工具类
  */
 @Component
 public class ProjectMD5Utils {

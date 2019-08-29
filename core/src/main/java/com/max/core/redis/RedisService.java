@@ -254,6 +254,7 @@ public interface RedisService {
      * @return
      */
     <T> T evalsha(final String sha, final int keycount, final String... args);
+
     /**
      * 将对象转为json字符串。若对象为null，则返回 {@link RedisService#BLANK_CONTENT}
      *
@@ -308,21 +309,23 @@ public interface RedisService {
 
     /**
      * Hash incr增减操作
+     *
+     * @param key   键
+     * @param field 子
+     * @param num   增减数
      * @author Chaims
      * @date 2019/3/16 11:27
-     * @param key 键
-     * @param field 子
-     * @param num 增减数
      */
     void hashIncr(String key, String field, Integer num);
 
     /**
      * 没有则新增,有则加
+     *
+     * @param key   键
+     * @param field 子
+     * @param num   初始值(增减数)
      * @author Chaims
      * @date 2019/3/16 14:34
-     * @param key 键
-     * @param field 子
-     * @param num 初始值(增减数)
      */
     void putOrIncrHash(String key, String field, Integer num);
 
@@ -332,10 +335,11 @@ public interface RedisService {
 
     /**
      * 根据key获取所有的value
+     *
+     * @param key ;
+     * @return java.util.List<java.lang.String>
      * @author Chaims
      * @date 2019/3/18 21:18
-     * @param key  ;
-     * @return java.util.List<java.lang.String>
      */
     List<String> hvalsHashValues(String key);
 

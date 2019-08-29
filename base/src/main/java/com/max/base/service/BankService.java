@@ -7,7 +7,7 @@ import com.max.base.entity.Bank;
  * 支持的银行 服务类
  *
  * @author zane
- * @since 2019-08-28
+ * @since 2019-08-29
  */
 public interface BankService extends IService<Bank> {
 

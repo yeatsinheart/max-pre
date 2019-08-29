@@ -25,16 +25,20 @@ import java.util.concurrent.TimeUnit;
  * Redis 服务接口实现类
  *
  * @author liwei
- *         16/10/30 下午5:28
+ * 16/10/30 下午5:28
  */
 @Slf4j
 @Component("redisService")
 public class RedisServiceImpl implements RedisService {
     private static JedisPool pool = null;
-
+    private final String OK_CODE = "OK";
+    private final String OK_MULTI_CODE = "+OK";
     @Resource
     private Environment env;
 
+    private static <T> JavaType getCollectionType(Class<? extends Collection> collectionClazz, Class<T> elementClazz) {
+        return om.getTypeFactory().constructCollectionType(collectionClazz, elementClazz);
+    }
 
     /**
      * 初始化操作
@@ -249,10 +253,6 @@ public class RedisServiceImpl implements RedisService {
         return redisResult;
     }
 
-    private static <T> JavaType getCollectionType(Class<? extends Collection> collectionClazz, Class<T> elementClazz) {
-        return om.getTypeFactory().constructCollectionType(collectionClazz, elementClazz);
-    }
-
     /**
      * 写入/修改 缓存内容(无论key是否存在，均会更新key对应的值)
      *
@@ -327,7 +327,6 @@ public class RedisServiceImpl implements RedisService {
         return set(key, value);
     }
 
-
     /**
      * 写入/修改 缓存内容(默认有过期时间 1小时)
      *
@@ -339,7 +338,6 @@ public class RedisServiceImpl implements RedisService {
     public String set(String key, String value) {
         return this.set(key, value, DEFAULT_EXPIRE_TIME);
     }
-
 
     /**
      * 写入/修改 缓存内容
@@ -441,6 +439,13 @@ public class RedisServiceImpl implements RedisService {
     }
 
     /**
+     * @Author: Sim
+     * @Description: 添加风控有关的redis操作接口
+     * @params:
+     * @Date: 上午10:52 2018/3/22
+     */
+
+    /**
      * redis 加法运算
      *
      * @param key
@@ -485,12 +490,6 @@ public class RedisServiceImpl implements RedisService {
     }
 
     /**
-     * @Author: Sim
-     * @Description: 添加风控有关的redis操作接口
-     * @params:
-     * @Date: 上午10:52 2018/3/22
-     */
-    /**
      * 发布消息到指定的频道
      *
      * @param channel
@@ -516,6 +515,8 @@ public class RedisServiceImpl implements RedisService {
         this.destroyResource(jedis);
     }
 
+    /*************************************风控操作接口END*************************************/
+
     /**
      * 将脚本 script 添加到脚本缓存中，但并不立即执行这个脚本
      *
@@ -535,6 +536,7 @@ public class RedisServiceImpl implements RedisService {
         }
     }
 
+    /***************************************************jedis操作set***************************************************/
 
     /**
      * 对 Lua 脚本进行求值
@@ -557,8 +559,6 @@ public class RedisServiceImpl implements RedisService {
         }
     }
 
-    /*************************************风控操作接口END*************************************/
-
     /**
      * 根据通配符表达式查询key值的set，通配符仅支持*
      *
@@ -579,8 +579,6 @@ public class RedisServiceImpl implements RedisService {
             this.destroyResource(jedis);
         }
     }
-
-    /***************************************************jedis操作set***************************************************/
 
     /**
      * @Author: Sim
@@ -603,7 +601,6 @@ public class RedisServiceImpl implements RedisService {
             this.destroyResource(jedis);
         }
     }
-
 
     /**
      * 插入集合
@@ -630,6 +627,7 @@ public class RedisServiceImpl implements RedisService {
 
     /**
      * 获取并删除集合中的第一个值
+     *
      * @param key
      * @return
      */
@@ -876,9 +874,6 @@ public class RedisServiceImpl implements RedisService {
         }
     }
 
-    private final String OK_CODE = "OK";
-    private final String OK_MULTI_CODE = "+OK";
-
     /**
      * 判断 返回值是否ok.
      */
@@ -1108,7 +1103,7 @@ public class RedisServiceImpl implements RedisService {
 
     /**
      * @Author: Sim
-     * @Description: 获取在线用户数 TODO 数据量大要测试性能问题
+     * @Description: 获取在线用户数
      * @params:
      * @Date: 下午4:02 2018/7/23
      */

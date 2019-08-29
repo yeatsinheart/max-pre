@@ -8,10 +8,11 @@ import java.io.Serializable;
 
 @Data
 public class LoginUserRequest implements Serializable {
-    private String name="";
-    private String passwd="";
+    private String name = "";
+    private String passwd = "";
     private String ip = IpUtil.getIpAddr();
-    public UserDto getUserDto(){
+
+    public UserDto getUserDto() {
         UserDto user = new UserDto();
         user.setName(this.getName());
         user.setPasswd(this.getPasswd());

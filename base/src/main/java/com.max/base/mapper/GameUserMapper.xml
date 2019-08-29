@@ -9,6 +9,7 @@
         <result column="game_user_name" property="gameUserName"/>
         <result column="game_user_passwd" property="gameUserPasswd"/>
         <result column="game_balance" property="gameBalance"/>
+        <result column="supplier_id" property="supplierId"/>
     </resultMap>
     <resultMap id="GameUserDtoResultMap" type="com.max.base.dto.GameUserDto">
         <id column="game_user_id" property="gameUserId"/>
@@ -16,6 +17,7 @@
         <result column="game_user_name" property="gameUserName"/>
         <result column="game_user_passwd" property="gameUserPasswd"/>
         <result column="game_balance" property="gameBalance"/>
+        <result column="supplier_id" property="supplierId"/>
     </resultMap>
     <resultMap id="GameUserResponseDtoResultMap" type="com.max.base.dto.response.GameUserResponseDto">
         <id column="game_user_id" property="gameUserId"/>
@@ -23,11 +25,12 @@
         <result column="game_user_name" property="gameUserName"/>
         <result column="game_user_passwd" property="gameUserPasswd"/>
         <result column="game_balance" property="gameBalance"/>
+        <result column="supplier_id" property="supplierId"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        game_user_id, user_id, game_user_name, game_user_passwd, game_balance
+        game_user_id, user_id, game_user_name, game_user_passwd, game_balance, supplier_id
     </sql>
 
 </mapper>

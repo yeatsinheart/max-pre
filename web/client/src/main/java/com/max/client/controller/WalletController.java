@@ -14,6 +14,9 @@ import com.max.base.service.GameUserService;
 import com.max.base.service.LogBankService;
 import com.max.base.service.UserService;
 import com.max.base.service.WalletOrderService;
+import com.max.core.constant.WalletOrderProcessEnum;
+import com.max.core.constant.WalletOrderTypeEnum;
+import com.max.core.exception.ServiceException;
 import com.max.core.redis.RedisResult;
 import com.max.core.redis.RedisService;
 import com.max.core.redis.impl.RedisKeyHelper;
@@ -22,6 +25,7 @@ import com.max.core.result.ResultCode;
 import com.max.core.result.ResultGenerator;
 import com.max.core.utils.MoneyUtil;
 import com.max.supplier.GameDispatch;
+import com.max.supplier.dto.GameTransferOutDto;
 import com.max.supplier.service.GameService;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
@@ -46,7 +50,7 @@ public class WalletController {
     private GameUserService gameUserService;
     @Autowired
     private RedisService redisService;
-    @Autowired
+    //@Autowired
     private GameDispatch gameDispatch;
 
     /*绑定银行卡*/
@@ -58,7 +62,7 @@ public class WalletController {
         UserDto userInDb = userInRedis.getResult();
         if (null != userInDb) {
             if (StringUtils.isBlank(userInDb.getWithdrawPasswd())) {
-                return ResultGenerator.genFailResult(ResultCode.NO_WALLET_PASSWD);
+                throw new ServiceException(ResultCode.NO_WALLET_PASSWD);
             }
             LogBank logBank = new LogBank();
             logBank.setBankUserName(bank.getBankUserName());
@@ -70,12 +74,12 @@ public class WalletController {
             if (success) {
                 return ResultGenerator.genSuccessResult(success);
             }
-            return ResultGenerator.genFailResult(ResultCode.BIND_BANK_ERR);
+            throw new ServiceException(ResultCode.BIND_BANK_ERR);
         }
-        return ResultGenerator.genFailResult(ResultCode.KICKED_OUT);
+        throw new ServiceException(ResultCode.KICKED_OUT);
     }
 
-    /*我的钱包*/
+    /*我的钱包//todo 游戏钱包资金归集*/
     @ApiOperation(value = "/wallet", tags = {"我的钱包：归并"})
     @PostMapping("/wallet")
     public Result wallet(@RequestHeader String token) {
@@ -90,18 +94,21 @@ public class WalletController {
             Vector<BigDecimal> wallets = new Vector<>();
             gameUsers.parallelStream().forEach(supplier -> {
                 GameService gameService = gameDispatch.getGameServiceBySupplierId(supplier.getSupplierId().toString());
-                BigDecimal money = BigDecimal.ZERO;
-                //todo money = gameService.getBalance(supplier);
-                //todo gameService.transferOut(supplier);
+
+                BigDecimal money = gameService.balance(supplier);
+                GameTransferOutDto transferOut = new GameTransferOutDto();
+                //需要生成转出订单
+                transferOut.setMoney(money);
+                transferOut.setUser(supplier);
                 wallets.add(money);
             });
 
 
         }
-        return ResultGenerator.genFailResult(ResultCode.KICKED_OUT);
+        throw new ServiceException(ResultCode.KICKED_OUT);
     }
 
-    /*我的余额*/
+    /*我的余额//todo 游戏钱包资金查询*/
     @ApiOperation(value = "/money", tags = {"我的余额：不归并"})
     @PostMapping("/money")
     public Result money(@RequestHeader String token) {
@@ -117,31 +124,27 @@ public class WalletController {
             gameUsers.parallelStream().forEach(supplier -> {
                 GameService gameService = gameDispatch.getGameServiceBySupplierId(supplier.getSupplierId().toString());
                 BigDecimal money = BigDecimal.ZERO;
-                //todo money = gameService.getBalance(supplier);
-                //todo gameService.transferOut(supplier);
+                 money = gameService.balance(supplier);
                 supplier.setGameBalance(MoneyUtil.toStringMoney(money));
                 supplier.setGameUserName(null);
                 supplier.setGameUserPasswd(null);
                 wallets.add(supplier);
             });
-            //todo 针对wallets 拼装前端想要的数据
-            // 用户没有玩过的游戏要不要显示0余额。
             return null;
         }
-        return ResultGenerator.genFailResult(ResultCode.KICKED_OUT);
+        throw new ServiceException(ResultCode.KICKED_OUT);
     }
 
     /*我的资金明细*/
-    @ApiOperation(value = "/moneyhistory", tags = {"我的资金明细"})
+    @ApiOperation(value = "/moneyhistory", tags = {"我的资金明细--已经成功的"})
     @PostMapping("/moneyhistory")
     public Result moneyhistory(WalletOrderReqDto walletLogRequest) {
-        //查询钱包增减日志
         QueryWrapper<WalletOrder> successOrder = new QueryWrapper<>();
         successOrder.eq("user_id", walletLogRequest.getUserId())
-                //todo 确认好状态流转
-                .eq("wallet_order_status", 2);
-        IPage<WalletOrder> walletOrders = walletOrderService.page(new Page<>(0, 20), successOrder);
-        // todo walletOrderService.pageLog(walletOrderRequest);
+                .eq("process", WalletOrderProcessEnum.OrderProcessEnum.FINISH.getCode());
+        IPage<WalletOrder> walletOrders = walletOrderService.page(
+                new Page<WalletOrder>(walletLogRequest.getPage(), walletLogRequest.getSize()),
+                successOrder);
         return ResultGenerator.genSuccessResult(walletOrders);
     }
 

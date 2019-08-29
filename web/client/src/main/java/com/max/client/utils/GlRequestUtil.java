@@ -85,7 +85,7 @@ public class GlRequestUtil {
     public static String getDomain(HttpServletRequest request) {
         String url = request.getRequestURL().toString();
         url = url.split("://")[1];
-        url= url.split("/")[0];
+        url = url.split("/")[0];
         return url;
     }
 

@@ -7,8 +7,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="transaction" />
         <module name="widthdraw" />
         <module name="event" />
+        <module name="order" />
         <module name="message" />
         <module name="game" />
         <module name="sms" />

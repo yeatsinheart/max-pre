@@ -11,7 +11,7 @@ import java.io.Serializable;
  * 系统级别提现设置
  *
  * @author zane
- * @since 2019-08-28
+ * @since 2019-08-29
  */
 @Data
 @ApiModel(value = "WalletLimitDto对象", description = "系统级别提现设置")

@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
  * 系统级别提现设置 Mapper 接口
  *
  * @author zane
- * @since 2019-08-28
+ * @since 2019-08-29
  */
 @Mapper
 public interface WalletLimitMapper extends BaseMapper<WalletLimit> {

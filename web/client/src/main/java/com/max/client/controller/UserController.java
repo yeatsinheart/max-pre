@@ -47,21 +47,23 @@ public class UserController {
 
     @ApiOperation(value = "/login", tags = {"账号密码登录"})
     @PostMapping("/login")
-    public Result login(@RequestHeader(required = false) String token, @Validated LoginUserRequest login, String code) {
+    public Result<UserDto> login(@RequestHeader(required = false) String token, @Validated LoginUserRequest login, String code) {
         RedisResult<UserDto> userInRedis = redisService.getResult(RedisKeyHelper.TOKEN_ONLINE + token, UserDto.class);
         UserDto userInDb = userInRedis.getResult();
         if (null == userInDb) {
             String loginCodeInRedis = redisService.getResult(RedisConstant.CODE_SEND_LOGIN + login.getName(), String.class).getResult();
             if (StringUtils.isEmpty(loginCodeInRedis)) {
-                return ResultGenerator.genFailResult(ResultCode.VALIDATAE_CODE_EXPIRED);
+                throw new ServiceException(ResultCode.VALIDATAE_CODE_EXPIRED);
             }
             if (StringUtils.isNotBlank(code) && code.equals(loginCodeInRedis)) {
                 /*用户名 或者 密码 错误*/
-
-
-                User user = userService.getOne(new QueryWrapper<User>().eq("name", login.getName()).eq("passwd", login.getPasswd()));//todo .login(loginRequest);
+                QueryWrapper<User> userByUserName = new QueryWrapper<User>().eq("name", login.getName());
+                User user = userService.getOne(userByUserName);//todo .login(loginRequest);
                 if (null == user) {
-                    return ResultGenerator.genFailResult(ResultCode.LOGIN_NO_USER);
+                    throw new ServiceException("账号不存在");
+                }
+                if (!user.getPasswd().equals(login.getPasswd())) {
+                    throw new ServiceException("账号与密码不匹配");
                 }
                 userInDb.setId(user.getId());
                 userInDb.setNick(user.getNick());
@@ -69,7 +71,7 @@ public class UserController {
                 userInDb.setBalance(MoneyUtil.toBigDecimalMoney(user.getBalance()));
                 userInDb.setToken(ProjectTokenUtils.genToken());
             } else {
-                return ResultGenerator.genFailResult(ResultCode.INVALID_SMS_CODE);
+                throw new ServiceException(ResultCode.INVALID_SMS_CODE);
             }
         }
         loginEvent.handle(userInDb);
@@ -79,19 +81,19 @@ public class UserController {
     /*手机号验证码登录*/
     @ApiOperation(value = "/phone/login", tags = {"手机号验证码登录"})
     @PostMapping("/phone/login")
-    public Result loginPhone(@RequestHeader(required = false) String token, @Validated LoginUserRequest login, String code) {
+    public Result<UserDto> loginPhone(@RequestHeader(required = false) String token, @Validated LoginUserRequest login, String code) {
         RedisResult<UserDto> userInRedis = redisService.getResult(RedisKeyHelper.TOKEN_ONLINE + token, UserDto.class);
         UserDto userInDb = userInRedis.getResult();
         if (null == userInDb) {
             String loginCodeInRedis = redisService.getResult(RedisConstant.SMS_CODE_SEND_LOGIN + login.getName(), String.class).getResult();
             if (StringUtils.isEmpty(loginCodeInRedis)) {
-                return ResultGenerator.genFailResult(ResultCode.VALIDATAE_CODE_EXPIRED);
+                throw new ServiceException(ResultCode.VALIDATAE_CODE_EXPIRED);
             }
             if (StringUtils.isNotBlank(code) && code.equals(loginCodeInRedis)) {
                 UserDto request = login.getUserDto();
                 User user = userService.getOne(new QueryWrapper<User>().eq("name", login.getName()));//todo .login(loginRequest);
                 if (null == user) {
-                    return ResultGenerator.genFailResult(ResultCode.LOGIN_NO_USER_BY_PHONE);
+                    throw new ServiceException("账号不存在");
                 }
                 userInDb.setId(user.getId());
                 userInDb.setNick(user.getNick());
@@ -99,7 +101,7 @@ public class UserController {
                 userInDb.setBalance(MoneyUtil.toBigDecimalMoney(user.getBalance()));
                 userInDb.setToken(ProjectTokenUtils.genToken());
             } else {
-                return ResultGenerator.genFailResult(ResultCode.INVALID_SMS_CODE);
+                throw new ServiceException(ResultCode.INVALID_SMS_CODE);
             }
         }
         loginEvent.handle(userInDb);
@@ -115,22 +117,22 @@ public class UserController {
         } else {
             RedisResult<UserDto> loginedUser = redisService.getResult(token, UserDto.class);
             if (null == loginedUser.getResult()) {
-                return ResultGenerator.genFailResult(ResultCode.KICKED_OUT);
+                throw new ServiceException(ResultCode.KICKED_OUT);
             }
             //增加缓存时间 10分鐘
-            redisService.setTTL(RedisKeyHelper.TOKEN_ONLINE +loginedUser.getResult().getToken(), UserConstant.USER_REDIS_KEEP_TIME);
-            redisService.setTTL(RedisKeyHelper.USER_ONLINE+loginedUser.getResult().getName(), UserConstant.USER_REDIS_KEEP_TIME);
+            redisService.setTTL(RedisKeyHelper.TOKEN_ONLINE + loginedUser.getResult().getToken(), UserConstant.USER_REDIS_KEEP_TIME);
+            redisService.setTTL(RedisKeyHelper.USER_ONLINE + loginedUser.getResult().getName(), UserConstant.USER_REDIS_KEEP_TIME);
             return ResultGenerator.genSuccessResult();
         }
     }
 
     @ApiOperation(value = "/signin", tags = {"注册"})
     @PostMapping("/signin")
-    public Result signin(SigninUserRequest signinUserRequest, String code) throws ServiceException {
+    public Result<UserDto> signin(SigninUserRequest signinUserRequest, String code) throws ServiceException {
         //获取已发送的手机验证码
         String signinCodeInRedis = redisService.getResult(RedisKeyHelper.USER_PHONE_SIGNIN_CODE + signinUserRequest.getName(), String.class).getResult();
         if (StringUtils.isEmpty(signinCodeInRedis)) {
-            return ResultGenerator.genFailResult(ResultCode.VALIDATAE_CODE_EXPIRED);
+            throw new ServiceException(ResultCode.VALIDATAE_CODE_EXPIRED);
         }
         //手机验证码正确
         if (StringUtils.isNotBlank(code) && code.equals(signinCodeInRedis)) {
@@ -138,7 +140,6 @@ public class UserController {
             request.setName(signinUserRequest.getName());
             request.setPasswd(signinUserRequest.getPasswd());
             request.setNick(RandomName.randomName(false, 4));
-            //todo UserDto userInDb = userService.signin(request);
             UserDto userInDb = null;
             User user = new User();
             user.setName(signinUserRequest.getName());
@@ -149,7 +150,7 @@ public class UserController {
             user.setCreateTime(LocalDateTime.now());
             boolean success = userService.save(user);
             if (!success) {
-                return ResultGenerator.genFailResult(ResultCode.USER_NAME_EXIST);
+                throw new ServiceException(ResultCode.USER_NAME_EXIST);
             }
             user = userService.getOne(new QueryWrapper<User>().eq("name", user.getName()));
             userInDb.setId(user.getId());
@@ -160,6 +161,6 @@ public class UserController {
             signinEvent.handle(userInDb);
             return ResultGenerator.genSuccessResult(userInDb);
         }
-        return ResultGenerator.genFailResult(ResultCode.INVALID_SMS_CODE);
+        throw new ServiceException(ResultCode.INVALID_SMS_CODE);
     }
 }

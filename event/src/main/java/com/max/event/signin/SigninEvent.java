@@ -10,8 +10,9 @@ import java.util.List;
 public class SigninEvent {
     @Autowired
     private List<SigninEventHandle> signinEventHandles;
-    public void handle(UserDto user){
-        for(SigninEventHandle handler:signinEventHandles){
+
+    public void handle(UserDto user) {
+        for (SigninEventHandle handler : signinEventHandles) {
             handler.handle(user);
         }
     }

@@ -50,7 +50,86 @@ public final class ProjectConstant {
 
 
     public static final Integer ES_FACTOR = 10000;//ES数值系数
+    public final static int[] OS_LIST = new int[]{OSType.ALL, OSType.PC, OSType.H5, OSType.ANDROID, OSType.IOS,
+            OSType.PAD};
+    public final static int[] CLIENT_LIST = new int[]{ClientType.ALL, ClientType.PC, ClientType.APP};
+    public final static int[] PAYMENT_CACHE_LIST = new int[]{PaymentCache.NORMAL, PaymentCache.LARGE};
 
+    public enum GlGameTypeEnum {
+
+        //0彩票，1真人，2体育，3老虎机，4捕鱼，5电竞
+        TICKET(0),
+        LIVE(1),
+        SPORTS(2),
+        TIGER(3),
+        FISH(4),
+        E_SPORTS(5),
+        POKER(6);
+
+        private int value = 0;
+
+        GlGameTypeEnum(int value) {
+            this.value = value;
+        }
+
+        @JsonValue
+        public int value() {
+            return this.value;
+        }
+    }
+
+    public enum GlGameMaintainEnum {
+
+        //0彩票，1真人，2体育，3老虎机，4捕鱼，5电竞
+        AG_LIVE(1),
+        AG_FISH(2),
+        SPORT_188(3),
+        PT_TIGER(4),
+        EBET_LIVE(5),
+        AG_TIGER(6),
+        LB_TICKET(8),
+        HL_POKER(10),
+        GM_POKER(11),
+        IM_TIGER(17),
+        SW_LOTTERY(19),
+        ;
+
+        private int value;
+
+        GlGameMaintainEnum(int value) {
+            this.value = value;
+        }
+
+        @JsonValue
+        public int value() {
+            return this.value;
+        }
+    }
+
+    public enum ImProductWalletEnum {
+
+        //0彩票，1真人，2体育，3老虎机，4捕鱼，5电竞
+        ESPORTSBULL(401),
+        SW_LOTTERY(504),
+        PP_TIGER(101),
+        PT_TIGER(102),
+        ;
+
+        private int value = 0;
+
+        ImProductWalletEnum(int value) {
+            this.value = value;
+        }
+
+        @JsonValue
+        public int value() {
+            return this.value;
+        }
+    }
+
+    public final static class BigDecimalNum {
+        public final static BigDecimal TEN_THOUSAND = new BigDecimal(10000);
+    }
 
     /**
      * 系统通知模板ID
@@ -332,9 +411,6 @@ public final class ProjectConstant {
 
     }
 
-    public final static int[] OS_LIST = new int[]{OSType.ALL, OSType.PC, OSType.H5, OSType.ANDROID, OSType.IOS,
-            OSType.PAD};
-
     public final class OSType { // -1ALL, 0PC，1H5，2安卓，3IOS，4PAD
         public final static int ALL = -1;
         public final static int PC = 0;
@@ -343,8 +419,6 @@ public final class ProjectConstant {
         public final static int IOS = 3;
         public final static int PAD = 4;
     }
-
-    public final static int[] CLIENT_LIST = new int[]{ClientType.ALL, ClientType.PC, ClientType.APP};
 
     public final class ClientType {//应用端(0 PC端、1 移动端)
         public final static int ALL = -1;
@@ -464,86 +538,12 @@ public final class ProjectConstant {
         public final static int DELETE = 2;
     }
 
-    public final static int[] PAYMENT_CACHE_LIST = new int[]{PaymentCache.NORMAL, PaymentCache.LARGE};
-
     /**
      * 充值商户缓存：0 普通充值、1 大额充值
      */
     public final class PaymentCache {
         public final static int NORMAL = 0;
         public final static int LARGE = 1;
-    }
-
-    public enum GlGameTypeEnum {
-
-        //0彩票，1真人，2体育，3老虎机，4捕鱼，5电竞
-        TICKET(0),
-        LIVE(1),
-        SPORTS(2),
-        TIGER(3),
-        FISH(4),
-        E_SPORTS(5),
-        POKER(6);
-
-        private int value = 0;
-
-        GlGameTypeEnum(int value) {
-            this.value = value;
-        }
-
-        @JsonValue
-        public int value() {
-            return this.value;
-        }
-    }
-
-    public enum GlGameMaintainEnum {
-
-        //0彩票，1真人，2体育，3老虎机，4捕鱼，5电竞
-        AG_LIVE(1),
-        AG_FISH(2),
-        SPORT_188(3),
-        PT_TIGER(4),
-        EBET_LIVE(5),
-        AG_TIGER(6),
-        LB_TICKET(8),
-        HL_POKER(10),
-        GM_POKER(11),
-        IM_TIGER(17),
-        SW_LOTTERY(19),
-        ;
-
-        private int value;
-
-        GlGameMaintainEnum(int value) {
-            this.value = value;
-        }
-
-        @JsonValue
-        public int value() {
-            return this.value;
-        }
-    }
-
-    public enum ImProductWalletEnum {
-
-        //0彩票，1真人，2体育，3老虎机，4捕鱼，5电竞
-        ESPORTSBULL(401),
-        SW_LOTTERY(504),
-        PP_TIGER(101),
-        PT_TIGER(102),
-        ;
-
-        private int value = 0;
-
-        ImProductWalletEnum(int value) {
-            this.value = value;
-        }
-
-        @JsonValue
-        public int value() {
-            return this.value;
-        }
     }
 
     /**
@@ -624,10 +624,6 @@ public final class ProjectConstant {
         public final static int LB_BET = 12;
         public final static int GM_BET = 13;
         public final static int HLQP_BET = 14;
-    }
-
-    public final static class BigDecimalNum {
-        public final static BigDecimal TEN_THOUSAND = new BigDecimal(10000);
     }
 
     /**

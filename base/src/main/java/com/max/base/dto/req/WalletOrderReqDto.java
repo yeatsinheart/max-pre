@@ -8,16 +8,17 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
- * 订单
+ * 账户订单
  *
  * @author zane
- * @since 2019-08-28
+ * @since 2019-08-29
  */
 @Data
-@ApiModel(value = "WalletOrderReqDto请求对象", description = "订单")
+@ApiModel(value = "WalletOrderReqDto请求对象", description = "账户订单")
 public class WalletOrderReqDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -29,17 +30,17 @@ public class WalletOrderReqDto implements Serializable {
     @ApiModelProperty(value = "用户ID")
     private Integer userId;
 
-    @ApiModelProperty(value = "操作：1充值 2提现 3转入游戏 4转出游戏 5活动入款")
-    private Integer walletOrderType;
+    @ApiModelProperty(value = "订单类型 枚举WalletOrderTypeEnum")
+    private Integer type;
+
+    @ApiModelProperty(value = "支付方式 枚举PayWayEnum")
+    private Integer payWay;
 
     @ApiModelProperty(value = "金额,元角分厘")
-    private String walletOrderMoney;
+    private BigDecimal money;
 
     @ApiModelProperty(value = "订单号")
-    private String walletOrderSeries;
-
-    @ApiModelProperty(value = "订单状态 0 处理中 1已结束")
-    private Integer walletOrderStatus;
+    private String series;
 
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;
@@ -47,24 +48,26 @@ public class WalletOrderReqDto implements Serializable {
     @ApiModelProperty(value = "修改时间")
     private LocalDateTime updateTime;
 
-    @ApiModelProperty(value = "删除 1 已删除")
-    private Integer deleted;
+    @ApiModelProperty(value = "付款人信息")
+    private String payer;
 
-    @ApiModelProperty(value = "银行信息")
-    private Integer logBankId;
+    @ApiModelProperty(value = "收款人信息")
+    private String receiver;
 
-    public WalletOrder toWalletOrder() {
-        WalletOrder walletOrder = new WalletOrder();
-        walletOrder.setOrderId(this.orderId);
-        walletOrder.setUserId(this.userId);
-        walletOrder.setWalletOrderType(this.walletOrderType);
-        walletOrder.setWalletOrderMoney(this.walletOrderMoney);
-        walletOrder.setWalletOrderSeries(this.walletOrderSeries);
-        walletOrder.setWalletOrderStatus(this.walletOrderStatus);
-        walletOrder.setCreateTime(this.createTime);
-        walletOrder.setUpdateTime(this.updateTime);
-        walletOrder.setDeleted(this.deleted);
-        walletOrder.setLogBankId(this.logBankId);
-        return walletOrder;
-    }
+    @ApiModelProperty(value = "当前环节 OrderProcessEnum")
+    private Integer process;
+
+    @ApiModelProperty(value = "当前环节操作结果 OrderProcessResultEnum")
+    private Integer processResult;
+
+    @ApiModelProperty(value = "失败重试次数：流程切换以后就清零")
+    private Integer tryNum;
+
+    @ApiModelProperty(value = "失败原因")
+    private String failMsg;
+    @ApiModelProperty(value = "当前页")
+    private Long page;
+    @ApiModelProperty(value = "每页显示数量")
+    private Long size;
+
 }

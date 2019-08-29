@@ -7,7 +7,7 @@ import com.max.base.entity.GameUser;
  * 游戏角色信息 服务类
  *
  * @author zane
- * @since 2019-08-28
+ * @since 2019-08-29
  */
 public interface GameUserService extends IService<GameUser> {
 

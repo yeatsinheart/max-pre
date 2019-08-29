@@ -11,7 +11,7 @@ import java.io.Serializable;
  * 分类与视图关系
  *
  * @author zane
- * @since 2019-08-28
+ * @since 2019-08-29
  */
 @Data
 @ApiModel(value = "RelationCategoryViewDto对象", description = "分类与视图关系")

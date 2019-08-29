@@ -9,9 +9,10 @@ import java.util.List;
 @Component
 public class LoginEvent {
     @Autowired
-    private List<LoginEventHandle> signinEventHandles;
-    public void handle(UserDto user){
-        for(LoginEventHandle handler:signinEventHandles){
+    private List<LoginEventHandle> loginEventHandles;
+
+    public void handle(UserDto user) {
+        for (LoginEventHandle handler : loginEventHandles) {
             handler.handle(user);
         }
     }

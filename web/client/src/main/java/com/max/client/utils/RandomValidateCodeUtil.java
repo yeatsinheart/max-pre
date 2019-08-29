@@ -21,17 +21,58 @@ import java.util.Random;
 public class RandomValidateCodeUtil {
     public static final String RANDOMCODEKEY = "validateCodeKey";//放到session中的key
     public static final String RANDOMCODE = "validateCode";//放到session中的key
+    private static final Logger logger = LoggerFactory.getLogger(RandomValidateCodeUtil.class);
     //private String randString = "0123456789";//随机产生只有数字的字符串 private String
     //private String randString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";//随机产生只有字母的字符串
     private static String randString = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";//随机产生数字与字母组合的字符串
+    private static Random random = new Random();
     private int width = 95;// 图片宽
     private int height = 25;// 图片高
     private int lineSize = 40;// 干扰线数量
     private int stringNum = 4;// 随机产生字符数量
 
-    private static final Logger logger = LoggerFactory.getLogger(RandomValidateCodeUtil.class);
+    /**
+     * 转换BufferedImage 数据为byte数组
+     *
+     * @param bImage Image对象
+     * @param format image格式字符串.如"gif","png"
+     * @return byte数组
+     */
+    public static String imageToBytes(BufferedImage bImage, String format) {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        try {
+            ImageIO.write(bImage, format, out);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //return out.toByteArray();
+        return Base64.encodeBase64String(out.toByteArray());
+    }
 
-    private static Random random = new Random();
+    /**
+     * 生成随机图片
+     */
+    public static String getRandcodeString(int len) {
+        // 绘制随机字符
+        String randomString = "";
+        for (int i = 1; i <= len; i++) {
+            String rand = String.valueOf(getRandomString(random.nextInt(randString.length())));
+            randomString += rand;
+        }
+        logger.info(randomString);
+        return randomString;
+    }
+
+    public static void main(String[] args) {
+        getRandcodeString(5);
+    }
+
+    /**
+     * 获取随机的字符
+     */
+    public static String getRandomString(int num) {
+        return String.valueOf(randString.charAt(num));
+    }
 
     /**
      * 获得字体
@@ -55,29 +96,9 @@ public class RandomValidateCodeUtil {
     }
 
     /**
-     * 转换BufferedImage 数据为byte数组
-     *
-     * @param bImage
-     * Image对象
-     * @param format
-     * image格式字符串.如"gif","png"
-     * @return byte数组
-     */
-    public static String imageToBytes(BufferedImage bImage, String format) {
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        try {
-            ImageIO.write(bImage, format, out);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        //return out.toByteArray();
-        return Base64.encodeBase64String(out.toByteArray());
-    }
-
-    /**
      * 生成随机图片
      */
-    public HashMap<String,String> getRandcode(HttpServletRequest request, HttpServletResponse response) {
+    public HashMap<String, String> getRandcode(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         // BufferedImage类是具有缓冲区的Image类,Image类是用于描述图像信息的类
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_BGR);
@@ -99,7 +120,7 @@ public class RandomValidateCodeUtil {
         session.removeAttribute(RANDOMCODEKEY);
         session.setAttribute(RANDOMCODEKEY, randomString);
         g.dispose();
-        HashMap<String,String> validateMap = new HashMap<String,String>();
+        HashMap<String, String> validateMap = new HashMap<String, String>();
         try {
             // 将内存中的图片通过流动形式输出到客户端
             //ImageIO.write(image, "JPEG", response.getOutputStream());
@@ -113,24 +134,8 @@ public class RandomValidateCodeUtil {
     }
 
     /**
-     * 生成随机图片
-     */
-    public static String getRandcodeString(int len) {
-        // 绘制随机字符
-        String randomString = "";
-        for (int i = 1; i <= len; i++) {
-            String rand = String.valueOf(getRandomString(random.nextInt(randString.length())));
-            randomString += rand;
-        }
-        logger.info(randomString);
-        return randomString;
-    }
-
-    public static void main(String[] args) {
-        getRandcodeString(5);
-    }
-    /**
      * 生成小写的随机数字字母组合
+     *
      * @param len
      * @return
      */
@@ -140,10 +145,11 @@ public class RandomValidateCodeUtil {
 
     /**
      * 生成4位随机数字
+     *
      * @return
      */
     public String getRandomNumber() {
-        return (int) ((Math.random() * 9 + 1) * 1000)+"";
+        return (int) ((Math.random() * 9 + 1) * 1000) + "";
     }
 
     /**
@@ -168,12 +174,5 @@ public class RandomValidateCodeUtil {
         int xl = random.nextInt(13);
         int yl = random.nextInt(15);
         g.drawLine(x, y, x + xl, y + yl);
-    }
-
-    /**
-     * 获取随机的字符
-     */
-    public static String  getRandomString(int num) {
-        return String.valueOf(randString.charAt(num));
     }
 }

@@ -13,21 +13,18 @@ import java.util.Date;
  * 日期相关工具类
  */
 public class ProjectDateUtils {
-    private static final Logger logger = LoggerFactory.getLogger(ProjectDateUtils.class);
-
     public static final String DF_YYYYMMDD = "yyyyMMdd";
     public static final String DF_YYYY_MM_DD = "yyyy-MM-dd";
     public static final String DF_YYYYMMDDHHMMSS = "yyyyMMddHHmmss";
     public static final String DF_YYYY_MM_DDHHMMSS = "yyyy-MM-dd HH:mm:ss";
     public static final String DF_HHMMSS = "HHmmss";
-
+    private static final Logger logger = LoggerFactory.getLogger(ProjectDateUtils.class);
 
     /**
      * 将日期转换成字符串
      *
      * @param date
      * @param format
-     *
      * @return
      */
     public static String format(Date date, String format) {
@@ -45,7 +42,6 @@ public class ProjectDateUtils {
      * 将日期转换成yyyyMMddHHmmss字符串
      *
      * @param date
-     *
      * @return
      */
     public static String format14(Date date) {
@@ -88,15 +84,16 @@ public class ProjectDateUtils {
 
     /**
      * 获取当天0点 date对象
+     *
      * @return
      */
-    public static Date getToday(){
-        Date today=null;
+    public static Date getToday() {
+        Date today = null;
         try {
-            today =parse(getNow8(),DF_YYYYMMDD);
+            today = parse(getNow8(), DF_YYYYMMDD);
         } catch (ParseException e) {
             //unreachable
-            logger.error("Parsing / Getting today's date failed.",e);
+            logger.error("Parsing / Getting today's date failed.", e);
             today = new Date();
         }
         return today;
@@ -104,16 +101,17 @@ public class ProjectDateUtils {
 
     /**
      * 获取当年1月1日0点 date对象
+     *
      * @return
      */
-    public static Date getNowYear(){
-        Date year=null;
+    public static Date getNowYear() {
+        Date year = null;
         try {
             String format = "yyyy";
-            year =parse(format(new Date(),format),format);
+            year = parse(format(new Date(), format), format);
         } catch (ParseException e) {
             //unreachable
-            logger.error("Parsing / Getting year's date failed.",e);
+            logger.error("Parsing / Getting year's date failed.", e);
             year = new Date();
         }
         return year;
@@ -121,16 +119,17 @@ public class ProjectDateUtils {
 
     /**
      * 获取当月1号0点 date对象
+     *
      * @return
      */
-    public static Date getNowMonth(){
-        Date month=null;
+    public static Date getNowMonth() {
+        Date month = null;
         try {
             String format = "yyyy-MM";
-            month =parse(format(new Date(),format),format);
+            month = parse(format(new Date(), format), format);
         } catch (ParseException e) {
             //unreachable
-            logger.error("Parsing / Getting month's date failed.",e);
+            logger.error("Parsing / Getting month's date failed.", e);
             month = new Date();
         }
         return month;
@@ -168,9 +167,9 @@ public class ProjectDateUtils {
         c.add(Calendar.MONTH, 0);
         c.set(Calendar.DAY_OF_MONTH, 1);//设置为1号,当前日期既为本月第一天
         try {
-            return parse(format8(c.getTime()),DF_YYYYMMDD);
+            return parse(format8(c.getTime()), DF_YYYYMMDD);
         } catch (ParseException e) {
-            logger.error("Parsing first day of current month is faile.",e);
+            logger.error("Parsing first day of current month is faile.", e);
             return null;
         }
 
@@ -184,9 +183,9 @@ public class ProjectDateUtils {
         c.add(Calendar.MONTH, 1);
         c.set(Calendar.DAY_OF_MONTH, 1);//设置为1号,当前日期既为本月第一天
         try {
-            return parse(format8(c.getTime()),DF_YYYYMMDD);
+            return parse(format8(c.getTime()), DF_YYYYMMDD);
         } catch (ParseException e) {
-            logger.error("Parsing first day of current month is faile.",e);
+            logger.error("Parsing first day of current month is faile.", e);
             return null;
         }
 
@@ -199,9 +198,9 @@ public class ProjectDateUtils {
         Calendar c = Calendar.getInstance();
         c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH));
         try {
-            return parse(format8(c.getTime()),DF_YYYYMMDD);
+            return parse(format8(c.getTime()), DF_YYYYMMDD);
         } catch (ParseException e) {
-            logger.error("Parsing first day of current month is faile.",e);
+            logger.error("Parsing first day of current month is faile.", e);
             return null;
         }
     }
@@ -229,26 +228,25 @@ public class ProjectDateUtils {
             return -1;
         }
         try {
-            fDate = parse(format8(fDate),DF_YYYYMMDD);
+            fDate = parse(format8(fDate), DF_YYYYMMDD);
             oDate = parse(format8(oDate), DF_YYYYMMDD);
         } catch (ParseException e) {
             logger.error("Parsing interval days is faile.", e);
         }
-        long nd = 1000*24*60*60;//一天的毫秒数
+        long nd = 1000 * 24 * 60 * 60;//一天的毫秒数
         //获得两个时间的毫秒时间差异
         long diff = oDate.getTime() - fDate.getTime();
-        Long day = diff/nd;//计算差多少天
+        Long day = diff / nd;//计算差多少天
         return day.intValue();
 
     }
 
     /**
-     *
      * @param date
      * @return
      * @throws ParseException
      */
-    public static Date getDate8(Date date){
+    public static Date getDate8(Date date) {
         try {
             return parse8(format8(date));
         } catch (ParseException e) {
@@ -259,11 +257,12 @@ public class ProjectDateUtils {
 
     /**
      * 时间加days天
+     *
      * @param date
      * @param days
      * @return
      */
-    public static Date addDate(Date date, int days){
+    public static Date addDate(Date date, int days) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.add(Calendar.DATE, days);
@@ -274,7 +273,7 @@ public class ProjectDateUtils {
      * 日期加法运算
      *
      * @param sourceDate
-     * @param months       增加的月数，可为负数
+     * @param months     增加的月数，可为负数
      * @return
      */
     public static Date addMonths(Date sourceDate, int months) {

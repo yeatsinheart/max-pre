@@ -7,16 +7,14 @@ import java.util.Date;
 
 /**
  * 平台流水生成器(单机)
- *
  */
 public class ProjectPlatTraceUtils {
+    private static final int LIMIT = 1000000;
+    private static final int START = 1;
     /**
      * 默认完整时间格式 yyyyMMddHHmmssS 17位
      */
     public static String DEFAULT_FULL_DATE_FMT = "yyyyMMddHHmmssS";
-
-    private static final int LIMIT = 1000000;
-    private static final int START = 1;
     private static int seqHouse = START;
 
     /**
@@ -25,7 +23,6 @@ public class ProjectPlatTraceUtils {
      * @param dateFormat  日期格式
      * @param busiFlag    业务标识
      * @param totalLength 流水字符串长度，若该长度小于dateFormat.length()+busiFlag.lenght()，则从左到右依次截取
-     *
      * @return
      */
     public static String genTrace(String dateFormat, String busiFlag, int totalLength) {
@@ -108,7 +105,6 @@ public class ProjectPlatTraceUtils {
      *
      * @param dateFormat  日期格式
      * @param totalLength 流水字符串长度，若该长度小于dateFormat.length()+busiFlag.lenght()，则从左到右依次截取
-     *
      * @return
      */
     public static String genTrace(String dateFormat, int totalLength) {
@@ -119,7 +115,6 @@ public class ProjectPlatTraceUtils {
      * 生成平台流水30位 含busiFlag长度
      *
      * @param busiFlag 业务标识
-     *
      * @return
      */
     public static String genTrace30(String busiFlag) {
@@ -130,7 +125,6 @@ public class ProjectPlatTraceUtils {
      * 生成平台流水27位 含busiFlag长度
      *
      * @param busiFlag 业务标识
-     *
      * @return
      */
     public static String genTrace27(String busiFlag) {
@@ -143,7 +137,6 @@ public class ProjectPlatTraceUtils {
      *
      * @param numStr
      * @param length
-     *
      * @return
      */
     public static String formatNum(String numStr, int length) {

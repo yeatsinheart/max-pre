@@ -15,16 +15,15 @@ import java.util.Random;
 
 public class SlideImageGenerator {
 
+    public static final int IMG_WEIGHT = 672;
+    public static final int IMG_HEIGH = 210;
+    public static final int SMALL_WEIGHT = 100;
+    public static final int SMALL_HEIGH = 100;
     private static String basePicturePath = "/opt/global/appconfig/slideimage/";
     private static String[] pictures =
             {"1.png", "2.png", "3.png", "4.png", "5.png", "6.png", "7.png"
                     , "8.png", "9.png", "10.png", "11.png", "12.png"};
     private static String blackPicture = basePicturePath + "black.jpg";
-
-    public static final int IMG_WEIGHT = 672;
-    public static final int IMG_HEIGH = 210;
-    public static final int SMALL_WEIGHT = 100;
-    public static final int SMALL_HEIGH = 100;
 
     public static void main(String[] args) throws IOException {
         System.out.println(Math.abs(76 - SlideImageGenerator.percentX(163)));

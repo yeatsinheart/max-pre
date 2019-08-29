@@ -16,6 +16,15 @@ public class DESEncrypt {
 
     private Cipher cipher;
 
+    public DESEncrypt(String key) throws Exception {
+        SecureRandom sr = new SecureRandom();
+        DESKeySpec dks = new DESKeySpec(key.getBytes());
+        SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
+        SecretKey securekey = keyFactory.generateSecret(dks);
+        cipher = Cipher.getInstance("DES");
+        cipher.init(Cipher.ENCRYPT_MODE, securekey, sr);
+    }
+
     public static String encrypt(String plainText, String key) throws Exception {
         SecureRandom sr = new SecureRandom();
         DESKeySpec dks = new DESKeySpec(key.getBytes());
@@ -36,15 +45,6 @@ public class DESEncrypt {
         cipher.init(Cipher.DECRYPT_MODE, securekey, sr);
         byte[] result = cipher.doFinal(Base64.decodeBase64(input));
         return new String(result);
-    }
-
-    public DESEncrypt(String key) throws Exception {
-        SecureRandom sr = new SecureRandom();
-        DESKeySpec dks = new DESKeySpec(key.getBytes());
-        SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
-        SecretKey securekey = keyFactory.generateSecret(dks);
-        cipher = Cipher.getInstance("DES");
-        cipher.init(Cipher.ENCRYPT_MODE, securekey, sr);
     }
 
     public String encrypt(String plainText) throws Exception {

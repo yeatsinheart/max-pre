@@ -4,7 +4,6 @@ import java.io.UnsupportedEncodingException;
 
 /**
  * 字节数组相关工具类
- *
  */
 public class ProjectByteUtils {
     /**
@@ -27,7 +26,6 @@ public class ProjectByteUtils {
      * int 数据转字节数组
      *
      * @param value
-     *
      * @return
      */
     public static byte[] getBytes(int value) {
@@ -59,7 +57,6 @@ public class ProjectByteUtils {
      * long 数据转字节数组
      *
      * @param value
-     *
      * @return
      */
     public static byte[] getBytes(long value) {
@@ -77,7 +74,6 @@ public class ProjectByteUtils {
      * double 数据转字节数组
      *
      * @param value
-     *
      * @return
      */
     public static byte[] getBytes(double value) {
@@ -89,7 +85,6 @@ public class ProjectByteUtils {
      * float 数据转字节数组
      *
      * @param value
-     *
      * @return
      */
     public static byte[] getBytes(float value) {
@@ -102,7 +97,6 @@ public class ProjectByteUtils {
      *
      * @param value
      * @param charset
-     *
      * @return
      */
     public static byte[] getBytes(String value, String charset) throws UnsupportedEncodingException {
@@ -116,7 +110,6 @@ public class ProjectByteUtils {
      * String 数据转字节数组(使用UTF-8字符编码集)
      *
      * @param value
-     *
      * @return
      */
     public static byte[] getBytes(String value) throws UnsupportedEncodingException {
@@ -128,7 +121,6 @@ public class ProjectByteUtils {
      * 计算hash值
      *
      * @param data
-     *
      * @return
      */
     public static int computeHash(byte[] data) {
@@ -153,7 +145,6 @@ public class ProjectByteUtils {
      * 计算hash值
      *
      * @param sourceDataArrays
-     *
      * @return
      */
     public static int computeHash(byte[]... sourceDataArrays) {

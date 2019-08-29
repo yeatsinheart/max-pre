@@ -44,12 +44,12 @@
 //        RedisResult<UserDto> loginedUser = redisService.getResult(token, UserDto.class);
 //        UserDto user = loginedUser.getResult();
 //        if (null == user) {
-//            return ResultGenerator.genFailResult(ResultCode.TOEKNUNVALIBLE.getCode(), ResultCode.TOEKNUNVALIBLE.getMessage());
+//            throw new ServiceException(ResultCode.TOEKNUNVALIBLE.getCode(), ResultCode.TOEKNUNVALIBLE.getMessage());
 //        }
 //        //是否可领取 可领取的奖励内容 自动时间范围内确定奖励选项，还是人工申请才确定奖励选项。
 //        ActivityAwardDto award = activityService.getAward(activity, user);
 //        if (null == award) {
-//            return ResultGenerator.genFailResult(ResultCode.AWARD_NOT_EXIST.getCode(), ResultCode.AWARD_NOT_EXIST.getMessage());
+//            throw new ServiceException(ResultCode.AWARD_NOT_EXIST.getCode(), ResultCode.AWARD_NOT_EXIST.getMessage());
 //        }
 //        return ResultGenerator.genSuccessResult(award);
 //    }
@@ -61,12 +61,12 @@
 //        RedisResult<UserDto> loginedUser = redisService.getResult(token, UserDto.class);
 //        UserDto user = loginedUser.getResult();
 //        if (null == user) {
-//            return ResultGenerator.genFailResult(ResultCode.TOEKNUNVALIBLE.getCode(), ResultCode.TOEKNUNVALIBLE.getMessage());
+//            throw new ServiceException(ResultCode.TOEKNUNVALIBLE.getCode(), ResultCode.TOEKNUNVALIBLE.getMessage());
 //        }
 //        //
 //        ActivityAwardDto award = activityService.getAward(activity, user);
 //        if (null == award) {
-//            return ResultGenerator.genFailResult(ResultCode.AWARD_NOT_EXIST.getCode(), ResultCode.AWARD_NOT_EXIST.getMessage());
+//            throw new ServiceException(ResultCode.AWARD_NOT_EXIST.getCode(), ResultCode.AWARD_NOT_EXIST.getMessage());
 //        }
 //        ActivityOrderDto activityOrder = activityOrderService.award(award);
 //        return ResultGenerator.genSuccessResult(award);

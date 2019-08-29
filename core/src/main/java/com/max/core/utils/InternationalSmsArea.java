@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class InternationalSmsArea {
     private static Map<String, String> areaMap = new HashMap<>();
+    private static Map<String, String> areaEngMap = new HashMap<>();
 
     static {
         areaMap.put("+1", "美国/加拿大");
@@ -220,8 +221,6 @@ public class InternationalSmsArea {
         areaMap.put("+1869", "圣克里斯多福与尼维斯");
         areaMap.put("+1876", "牙买加");
     }
-
-    private static Map<String, String> areaEngMap = new HashMap<>();
 
     static {
         areaEngMap.put("+1", "United States/Canada");
@@ -441,6 +440,7 @@ public class InternationalSmsArea {
     public static String getTelAreaCNName(String telArea) {
         return areaMap.get(telArea);
     }
+
     public static String getTelAreaEngName(String telArea) {
         return areaEngMap.get(telArea);
     }

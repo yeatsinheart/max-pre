@@ -9,10 +9,58 @@ import java.util.List;
  */
 public interface GlobalConstants {
     /**
+     * 后台用户信息KEY
+     */
+    String SUPER_USER_INFO = "super_user_info";
+    /**
+     * 可投注的最高返点
+     */
+    int BET_TOP_REBATE = 128;
+    /**
+     * 最高返点
+     */
+    int TOP_REBATE = 130;
+    int[] REBATE_LEVEL130 = {125, 126, 127, 128, 129, 130}; // 直属13.0
+    int[] REBATE_LEVEL_SUB130 = {125, 126, 127, 128, 129}; // 平级13.0
+    int[] REBATE_LEVEL129 = {125, 126, 127, 128, 129}; // 12.9
+    int[] REBATE_LEVEL_SUB129 = {125, 126, 127, 128}; // 平级12.9
+    int[] REBATE_LEVEL128 = {125, 126, 127, 128}; // 12.8
+    int[] REBATE_LEVEL_SUB128 = {125, 126, 127}; // 平级12.8
+    int[] REBATE_LEVEL127 = {125, 126, 127}; // 12.7
+    int[] REBATE_LEVEL_SUB127 = {125, 126}; // 平级12.7
+    int[] REBATE_LEVEL126 = {125, 126}; // 12.6
+    int[] REBATE_LEVEL_SUB126 = {125}; // 平级12.6
+    int[] REBATE_LEVEL125 = {125}; // 12.5
+    /**
+     * 后台Dashboard数据获取天数
+     */
+    int dataDays = 60;
+    /**
+     * 系统通知清理时间
+     **/
+    int noticeClear = 30;
+
+
+    // 假的用户
+    public enum FakeUserType {
+        PLAYER125("000-000-000-000-player125"), AGENT125("000-000-000-000-agent125"), AGENT128("000-000-000-000-agent128");
+
+        private String token;
+
+        private FakeUserType(String token) {
+            this.token = token;
+        }
+
+        public String getToken() {
+            return token;
+        }
+    }
+
+
+    /**
      * 系统状态
      *
      * @author Leo
-     *
      */
     interface SystemStatus {
         int SUCCESS = 0; // 成功
@@ -24,8 +72,8 @@ public interface GlobalConstants {
      * 彩种，玩法状态
      *
      * @author Leo
-     *
-     *         2015年8月5日 下午1:44:42
+     * <p>
+     * 2015年8月5日 下午1:44:42
      */
     interface TicketStatus {
         int SALING = 0; // 正在销售
@@ -37,8 +85,8 @@ public interface GlobalConstants {
      * 开奖状态
      *
      * @author Leo
-     *
-     *         2015年8月13日 下午6:24:16
+     * <p>
+     * 2015年8月13日 下午6:24:16
      */
     interface TicketOpenStatus {
         int SALING = 0; // 销售中
@@ -55,8 +103,8 @@ public interface GlobalConstants {
      * 投注，追号状态
      *
      * @author Leo
-     *
-     *         2015年8月5日 下午1:44:52
+     * <p>
+     * 2015年8月5日 下午1:44:52
      */
     interface BetStatus {
         int UNOPEN = 0; // 未开奖
@@ -69,7 +117,6 @@ public interface GlobalConstants {
      * 投注模式
      *
      * @author ab
-     *
      */
     interface BetMethod {
         int YUAN = 10000;
@@ -82,7 +129,6 @@ public interface GlobalConstants {
      * 开关状态
      *
      * @author ab
-     *
      */
     interface OpenStatus {
         int TRUE = 1;
@@ -93,8 +139,8 @@ public interface GlobalConstants {
      * 追号状态
      *
      * @author Leo
-     *
-     *         2015年10月16日 上午10:02:02
+     * <p>
+     * 2015年10月16日 上午10:02:02
      */
     interface ChaseStatus {
         int INIT = 0;
@@ -112,8 +158,8 @@ public interface GlobalConstants {
      * 返点状态
      *
      * @author Leo
-     *
-     *         2015年8月5日 下午1:50:07
+     * <p>
+     * 2015年8月5日 下午1:50:07
      */
     interface BonusStatus {
         int DONE = 1; // 已经返点
@@ -124,7 +170,6 @@ public interface GlobalConstants {
      * 奖金模式
      *
      * @author ab
-     *
      */
     interface MoneyMethod {
         int MIN = 1;
@@ -135,8 +180,8 @@ public interface GlobalConstants {
      * 可提现余额限制
      *
      * @author Leo
-     *
-     *         2015年8月4日 上午11:53:37
+     * <p>
+     * 2015年8月4日 上午11:53:37
      */
     interface ValidBalanceType {
         String TYPE_KEY = "validBalanceType";
@@ -159,8 +204,8 @@ public interface GlobalConstants {
      * 用户帐变类型
      *
      * @author Leo
-     *
-     *         2015年8月4日 上午11:58:41
+     * <p>
+     * 2015年8月4日 上午11:58:41
      */
     interface BalanceType {
         int TYPE_RECHARGE = 100; // 充值
@@ -229,8 +274,8 @@ public interface GlobalConstants {
      * 平台活动状态
      *
      * @author Leo
-     *
-     *         2015年8月4日 上午11:53:37
+     * <p>
+     * 2015年8月4日 上午11:53:37
      */
     interface ActivityType {
 
@@ -321,7 +366,6 @@ public interface GlobalConstants {
      * 彩种开奖形态
      *
      * @author Frank
-     *
      */
     interface TicketOpenType {
         // 号码共有 0~9，一次开五个号码的彩种
@@ -345,12 +389,10 @@ public interface GlobalConstants {
         Integer[] TYPE_63 = {TicketType.JSK3};
     }
 
-
     /**
      * 彩种玩法 group
      *
      * @author Frank
-     *
      */
     interface TicketPlayGroup {
         // 五星直选复式
@@ -1047,13 +1089,12 @@ public interface GlobalConstants {
 
     }
 
-
     /**
      * 彩系ID及名稱
      *
      * @author Leo
-     *
-     *         2015年8月4日 上午11:53:37
+     * <p>
+     * 2015年8月4日 上午11:53:37
      */
     interface TicketSeriesType {
         int SSCPlayId = 1030101; // 时时彩，以重庆时时彩前三直选ID为准
@@ -1180,8 +1221,8 @@ public interface GlobalConstants {
      * 彩种ID
      *
      * @author Leo
-     *
-     *         2015年8月4日 上午11:53:37
+     * <p>
+     * 2015年8月4日 上午11:53:37
      */
     interface TicketType {
         int SSCPlayId = 1030101; // 时时彩，以重庆时时彩前三直选ID为准
@@ -1241,50 +1282,42 @@ public interface GlobalConstants {
         int HN115 = 40; // 河南11选5
         int BJ115 = 41; // 北京11选5
 
-        int[] IDS_KL = new int[] {BJPK10};
-        int[] IDS_DP = new int[] {FC3D, P5P3, FFC3D, FFC53D, TXFFC3D, QQFFC3D};
-        int[] IDS_SSC = new int[] {CQSSC, JXSSC, XJSSC, TJSSC, HLJSSC, FFC, FFC5, FFC3, MMC, TIGERMMC,
+        int[] IDS_KL = new int[]{BJPK10};
+        int[] IDS_DP = new int[]{FC3D, P5P3, FFC3D, FFC53D, TXFFC3D, QQFFC3D};
+        int[] IDS_SSC = new int[]{CQSSC, JXSSC, XJSSC, TJSSC, HLJSSC, FFC, FFC5, FFC3, MMC, TIGERMMC,
                 KR105, TWBG, XJP2, BJ5, DJ105, F105, CD305, TXFFC, QQ30, QQ105, QQFFC};
-        int[] IDS_115 = new int[] {GD115, SD115, JX115, FFC115, FFC3115, SH115, JS115,HN115,BJ115};
-        int[] IDS_K3 = new int[] {JSK3};
-        int[] SELF = new int[] {FFC, FFC5, FFC3, FFC115, FFC3115, FFC3D, FFC53D, MMC, TIGERMMC, F105,
+        int[] IDS_115 = new int[]{GD115, SD115, JX115, FFC115, FFC3115, SH115, JS115, HN115, BJ115};
+        int[] IDS_K3 = new int[]{JSK3};
+        int[] SELF = new int[]{FFC, FFC5, FFC3, FFC115, FFC3115, FFC3D, FFC53D, MMC, TIGERMMC, F105,
                 QQ30, QQ105, MKSIXSELF};
-        int[] OFFICIAL = new int[] {CQSSC, JXSSC, XJSSC, GD115, SD115, FC3D, P5P3, TJSSC, HLJSSC, JX115,
+        int[] OFFICIAL = new int[]{CQSSC, JXSSC, XJSSC, GD115, SD115, FC3D, P5P3, TJSSC, HLJSSC, JX115,
                 BJPK10, KR105, SH115, JS115, TWBG, XJP2, BJ5, DJ105, JSK3, CD305, TXFFC, QQ30, QQ105,
                 TXFFC3D, QQFFC, QQFFC3D};
         int[] HANDICAP_TICKET = {CQSSC, FFC, BJPK10, MKSIX};
     }
-
     /**
      * 系统用户状态
      *
      * @author Leo
-     *
-     *         2015年8月11日 上午11:23:01
+     * <p>
+     * 2015年8月11日 上午11:23:01
      */
     interface SuperUserStatus {
         int LOCKED = 1; // 已锁定
         int UNLOCKED = 0; // 未锁定
     }
-
     /**
      * 审核状态
      *
      * @author Leo
-     *
-     *         2015年8月21日 下午4:59:07
+     * <p>
+     * 2015年8月21日 下午4:59:07
      */
     interface ApproveStatus {
         int UNAPPROVED = 0; // 未审核
         int ACCEPT = 1; // 同意
         int REJECT = 2; // 拒绝
     }
-
-    /**
-     * 后台用户信息KEY
-     */
-    String SUPER_USER_INFO = "super_user_info";
-
     /**
      * 用户操作数据（解冻/冻结/回收）
      */
@@ -1337,7 +1370,6 @@ public interface GlobalConstants {
         String RECOVER_TYPE_NAME = "回收";// 回收名称
         String RESET_TYPE_NAME = "申诉";// 申诉名称
     }
-
     /**
      * 验证类型限制
      */
@@ -1348,14 +1380,12 @@ public interface GlobalConstants {
         int HAVEINTERFACE = 1;// 接口已设置
 
     }
-
     /**
      * 记录清理时间
      */
     interface recodeClear {
         long clearDay = 30 * 24 * 3600 * 1000l;// 30天前的记录清理
     }
-
     /**
      * 站内信称呼
      */
@@ -1364,7 +1394,6 @@ public interface GlobalConstants {
         String ME = "我";// 我
         String SUPERUSER = "系统管理员";// 系统管理员
     }
-
     /**
      * 系统通知模板ID
      */
@@ -1380,7 +1409,6 @@ public interface GlobalConstants {
         int WIN = 9;// 中奖通知
         int SEND_GIFT = 10;// 发送礼物
     }
-
     interface LoginType {
         int TYPE_PC = 0;
         int TYPE_ANDROID = 1;
@@ -1389,7 +1417,6 @@ public interface GlobalConstants {
         String IOS = "IOS客户端";// IOS客户端
         String ANDROID = "Android客户端"; // Android客户端
     }
-
     interface noticeSendType {
         int SYSTEMNOTICE_TYPE = 1;// 系统通知
         int EMAILNOTICE_TYPE = 2;// 移动端登录
@@ -1399,7 +1426,6 @@ public interface GlobalConstants {
         String EMAILNOTICE = "邮件通知";// 移动端登录
         String DESKTOPNOTICE = "桌面通知"; // 桌面通知
     }
-
     interface noticeTargetName {
         String LEVEL0 = "13.0（招商）";
         String LEVEL1 = "13.0（直属）";
@@ -1428,8 +1454,8 @@ public interface GlobalConstants {
      * 任务完成状态
      *
      * @author Leo
-     *
-     *         2015年11月9日 上午10:55:01
+     * <p>
+     * 2015年11月9日 上午10:55:01
      */
     interface TaskStatus {
         int COMPLETE = 1;
@@ -1448,30 +1474,6 @@ public interface GlobalConstants {
         int H5 = 3;
         int MOBILE = 9;
     }
-
-    /** 可投注的最高返点 */
-    int BET_TOP_REBATE = 128;
-
-    /** 最高返点 */
-    int TOP_REBATE = 130;
-
-    int[] REBATE_LEVEL130 = {125, 126, 127, 128, 129, 130}; // 直属13.0
-    int[] REBATE_LEVEL_SUB130 = {125, 126, 127, 128, 129}; // 平级13.0
-    int[] REBATE_LEVEL129 = {125, 126, 127, 128, 129}; // 12.9
-    int[] REBATE_LEVEL_SUB129 = {125, 126, 127, 128}; // 平级12.9
-    int[] REBATE_LEVEL128 = {125, 126, 127, 128}; // 12.8
-    int[] REBATE_LEVEL_SUB128 = {125, 126, 127}; // 平级12.8
-    int[] REBATE_LEVEL127 = {125, 126, 127}; // 12.7
-    int[] REBATE_LEVEL_SUB127 = {125, 126}; // 平级12.7
-    int[] REBATE_LEVEL126 = {125, 126}; // 12.6
-    int[] REBATE_LEVEL_SUB126 = {125}; // 平级12.6
-    int[] REBATE_LEVEL125 = {125}; // 12.5
-
-    /** 后台Dashboard数据获取天数 */
-    int dataDays = 60;
-
-    /** 系统通知清理时间 **/
-    int noticeClear = 30;
 
     interface DividStatus {
         int OK = 0; // 正常
@@ -1509,9 +1511,9 @@ public interface GlobalConstants {
     }
 
     interface IntegralActionId {
-        int RECHARGE_QQ=1500;
-        int RECHARGE_FLOW=1400;
-        int RECHARGE_PHONE=1300;
+        int RECHARGE_QQ = 1500;
+        int RECHARGE_FLOW = 1400;
+        int RECHARGE_PHONE = 1300;
         int GIVE = 1200;
         int ACTIVITY_MANUAL = 1100;
         int ACTIVITY_LUCKY = 1000;
@@ -1528,9 +1530,9 @@ public interface GlobalConstants {
     }
 
     interface IntegralActionName {
-        String RECHARGE_QQ="QQ充值";
-        String RECHARGE_FLOW="兑换流量";
-        String RECHARGE_PHONE="兑换话费";
+        String RECHARGE_QQ = "QQ充值";
+        String RECHARGE_FLOW = "兑换流量";
+        String RECHARGE_PHONE = "兑换话费";
         String GIVE = "赠送";
         String ACTIVITY_MANUAL = "调整积分";
         String ACTIVITY_LUCKY = "幸运夺宝";
@@ -1559,21 +1561,6 @@ public interface GlobalConstants {
     interface TicketTop {
         List<Integer> DEFAULT_TICKET_IDS = ImmutableList.of(1, 19, 32, 10, 21, 27, 25, 13); // 默认普通彩种
         List<Integer> DEFAULT_PK_TICKET_IDS = ImmutableList.of(1, 10, 18, 34); // 默认盘口彩种
-    }
-
-    // 假的用户
-    public enum FakeUserType {
-        PLAYER125("000-000-000-000-player125"), AGENT125("000-000-000-000-agent125"), AGENT128("000-000-000-000-agent128");
-
-        private String token;
-
-        private FakeUserType(String token) {
-            this.token = token;
-        }
-
-        public String getToken() {
-            return token;
-        }
     }
 
     interface UserCouponWayId {

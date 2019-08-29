@@ -13,7 +13,7 @@ import java.io.Serializable;
  * 钱包变动记录
  *
  * @author zane
- * @since 2019-08-28
+ * @since 2019-08-29
  */
 @Data
 @ApiModel(value = "LogWalletLimitReqDto请求对象", description = "钱包变动记录")

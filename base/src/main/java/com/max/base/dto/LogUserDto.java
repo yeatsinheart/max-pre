@@ -12,7 +12,7 @@ import java.io.Serializable;
  * 用户操作记录
  *
  * @author zane
- * @since 2019-08-28
+ * @since 2019-08-29
  */
 @Data
 @ApiModel(value = "LogUserDto对象", description = "用户操作记录")

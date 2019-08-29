@@ -56,11 +56,12 @@ public class RedisResult<T> implements Serializable {
         this.listResult = listResult;
     }
 
-    public void setKeyExists(boolean keyExists) {
-        this.keyExists = keyExists;
-    }
     public boolean isKeyExists() {
         return keyExists;
+    }
+
+    public void setKeyExists(boolean keyExists) {
+        this.keyExists = keyExists;
     }
 
     public T getResultObj() {

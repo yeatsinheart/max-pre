@@ -1,7 +1,5 @@
 package com.max.base.dto.response;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.max.base.entity.LogBank;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -13,7 +11,7 @@ import java.io.Serializable;
  * 用户银行卡记录
  *
  * @author zane
- * @since 2019-08-28
+ * @since 2019-08-29
  */
 @Data
 
@@ -22,14 +20,13 @@ public class LogBankResponseDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "log_bank_id", type = IdType.AUTO)
     private Integer logBankId;
 
     @ApiModelProperty(value = "支持的银行ID")
-    private String bankId;
+    private Integer bankId;
 
     @ApiModelProperty(value = "使用人")
-    private String userId;
+    private Integer userId;
 
     @ApiModelProperty(value = "持卡人姓名")
     private String bankUserName;

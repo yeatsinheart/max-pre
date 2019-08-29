@@ -12,7 +12,7 @@ import java.io.Serializable;
  * 游戏记录
  *
  * @author zane
- * @since 2019-08-28
+ * @since 2019-08-29
  */
 @Data
 @ApiModel(value = "LogGameReqDto请求对象", description = "游戏记录")

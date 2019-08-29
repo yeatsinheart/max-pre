@@ -21,7 +21,7 @@ public class StringEncryptor {
     }
 
     public static String encryptBankCard(String cardNo) {
-        return simpleEncrypt(cardNo, 4, cardNo.length()-4);
+        return simpleEncrypt(cardNo, 4, cardNo.length() - 4);
     }
 
     public static String encryptEmail(String email) {
@@ -31,17 +31,18 @@ public class StringEncryptor {
         int end = email.indexOf("@");
         return simpleEncrypt(email, 3, end);
     }
-    public static String encryptUsername(String username){
-        String realname1 =null;
-        char[] r =  username.toCharArray();
-        if(r.length ==1){
-            realname1 =  username;
+
+    public static String encryptUsername(String username) {
+        String realname1 = null;
+        char[] r = username.toCharArray();
+        if (r.length == 1) {
+            realname1 = username;
         }
-        if(r.length == 2){
-            realname1 =  username.replaceFirst(username.substring(1),"*");
+        if (r.length == 2) {
+            realname1 = username.replaceFirst(username.substring(1), "*");
         }
         if (r.length > 2) {
-            realname1 =  username.replaceFirst(username.substring(1,r.length-1) ,"*");
+            realname1 = username.replaceFirst(username.substring(1, r.length - 1), "*");
         }
         return realname1;
     }
@@ -117,10 +118,11 @@ public class StringEncryptor {
 
     /**
      * 2位字母自增
+     *
      * @param args
      */
     public static void main(String[] args) {
-            String a="bb";
+        String a = "bb";
 
         System.out.print(createNext(a));
 //            for (int i=1;i<26*26+1;i++){
@@ -130,58 +132,44 @@ public class StringEncryptor {
 //                    System.out.println();
 //                }
 //            }
-        }
+    }
 
-        public static String createNext(String string){
-            char [] tempChar = string.toCharArray();
-            for(int i =tempChar.length-1;i>=1;i--){
-                if (tempChar[i]<'z' ){
-                    tempChar[i]=(char)(tempChar[i]+1);
-                    break;
-                }else {
-                    tempChar[i]='a';
-                    tempChar[i-1]=(char)(tempChar[i-1]+1);
-                    if (tempChar[i-1]<='z'){
-                        i=0;
-                    }
+    public static String createNext(String string) {
+        char[] tempChar = string.toCharArray();
+        for (int i = tempChar.length - 1; i >= 1; i--) {
+            if (tempChar[i] < 'z') {
+                tempChar[i] = (char) (tempChar[i] + 1);
+                break;
+            } else {
+                tempChar[i] = 'a';
+                tempChar[i - 1] = (char) (tempChar[i - 1] + 1);
+                if (tempChar[i - 1] <= 'z') {
+                    i = 0;
                 }
             }
-            return String.valueOf(tempChar);
         }
-    public String getTelnum(String sParam){
-
-        if(sParam.length()<=0)
-            return "";
-        Pattern pattern = Pattern.compile("(1|861)(3|5|8)\\d{9}$*");
-        Matcher matcher = pattern.matcher(sParam);
-        StringBuffer bf = new StringBuffer();
-        while (matcher.find()) {
-            bf.append(matcher.group()).append(",");
-        }
-        int len = bf.length();
-        if (len > 0) {
-            bf.deleteCharAt(len - 1);
-        }
-        return bf.toString();
+        return String.valueOf(tempChar);
     }
 
     /**
      * emoji 表情过滤
-     * @author Chaims
-     * @date 2019/4/2 17:41
+     *
      * @param source ;
      * @return java.lang.String
+     * @author Chaims
+     * @date 2019/4/2 17:41
      */
     public static String filterEmoji(String source) {
-        if(StringUtils.isNotBlank(source)){
+        if (StringUtils.isNotBlank(source)) {
             return source.replaceAll("[\\ud800\\udc00-\\udbff\\udfff\\ud800-\\udfff]", "");
-        }else{
+        } else {
             return source;
         }
     }
 
     /**
      * 数字转换成 大写中文
+     *
      * @param intInput
      * @return
      */
@@ -246,10 +234,28 @@ public class StringEncryptor {
 
     /**
      * 获取ActivityGameTypeList
+     *
      * @param gameType
      * @return
      */
     public static List<Integer> getActivityGameTypeList(String gameType) {
-        return Arrays.asList(gameType.replace("[","").replace("]","").split(",")).stream().map(Integer::parseInt).collect(Collectors.toList());
+        return Arrays.asList(gameType.replace("[", "").replace("]", "").split(",")).stream().map(Integer::parseInt).collect(Collectors.toList());
+    }
+
+    public String getTelnum(String sParam) {
+
+        if (sParam.length() <= 0)
+            return "";
+        Pattern pattern = Pattern.compile("(1|861)(3|5|8)\\d{9}$*");
+        Matcher matcher = pattern.matcher(sParam);
+        StringBuffer bf = new StringBuffer();
+        while (matcher.find()) {
+            bf.append(matcher.group()).append(",");
+        }
+        int len = bf.length();
+        if (len > 0) {
+            bf.deleteCharAt(len - 1);
+        }
+        return bf.toString();
     }
 }

@@ -9,8 +9,7 @@ public enum GameTypeCode {
     XXX(4, "捕鱼"),
     XXX(5, "电竞"),
     XXX(6, "棋牌")
-    */
-    ;
+    */;
 
     private int code;
     private String description;

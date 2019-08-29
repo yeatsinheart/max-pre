@@ -18,37 +18,42 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler()
     @ResponseBody
-    Result handleBindException(BindException e){
-        log.warn("参数校验失败{}",e.getFieldErrors());
+    Result handleBindException(BindException e) {
+        log.warn("参数校验失败{}", e.getFieldErrors());
         return ResultGenerator.genFailResult(ResultCode.ARGS_FAIL);
     }
+
     @ExceptionHandler()
     @ResponseBody
-    Result handleBindException(DuplicateKeyException e){
-        log.warn("数据已存在{}",e.getMessage());
+    Result handleBindException(DuplicateKeyException e) {
+        log.warn("数据已存在{}", e.getMessage());
         return ResultGenerator.genFailResult(ResultCode.INVALID_PARAM);
     }
+
     @ExceptionHandler()
     @ResponseBody
-    Result handleBindException(NumberFormatException e){
-        log.warn("数值转换异常{}",e.getMessage());
+    Result handleBindException(NumberFormatException e) {
+        log.warn("数值转换异常{}", e.getMessage());
         return ResultGenerator.genFailResult(ResultCode.INVALID_PARAM);
     }
+
     @ExceptionHandler()
     @ResponseBody
-    Result handleServiceException(ServiceException e){
+    Result handleServiceException(ServiceException e) {
         return ResultGenerator.genFailResult(e.getCode(), e.getMessage());
     }
+
     @ExceptionHandler()
     @ResponseBody
-    Result handleIllegalArgumentException(IllegalArgumentException e){
-        log.warn("参数不正确{}",e);
+    Result handleIllegalArgumentException(IllegalArgumentException e) {
+        log.warn("参数不正确{}", e);
         return ResultGenerator.genFailResult(ResultCode.ARGS_FAIL);
     }
+
     @ExceptionHandler()
     @ResponseBody
-    Result handleException(Exception e){
-        log.error("系统异常{}",e);
+    Result handleException(Exception e) {
+        log.error("系统异常{}", e);
         return ResultGenerator.genFailResult(ResultCode.FAIL);
     }
 }

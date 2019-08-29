@@ -60,7 +60,7 @@ public class HtmlTemplateUtils {
 
     public static String getQRCode(String qrCode) {
         StringBuilder sb = new StringBuilder();
-        
+
         try {
             sb.append("<html>");
             sb.append("<head><meta http-equiv='Content-Type' content='text/html; charset=GBK'></head>");

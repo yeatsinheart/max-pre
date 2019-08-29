@@ -11,26 +11,26 @@ import java.util.List;
  */
 public enum GameChannelCode {
 
-    GAME_AG(1, "AG游戏",true),
-    GAME_EBET(2, "EBET游戏",true),
-    GAME_BBIN(3, "BBIN游戏",false),
-    GAME_PT(4, "PT游戏",true),
-    GAME_MG(5, "MG游戏",false),
-    GAME_GG(6, "GG游戏",false),
-    GAME_188(7, "贝博体育",true),
-    GAME_LB(8, "LB彩票",true),
-    GAME_KY(9, "开元棋牌",false),
-    GAME_HLQP(10, "欢乐棋牌",true),
-    GAME_GMQP(11, "GM棋牌",true),
-    GAME_188_LIVE(13, "小金真人",true),
-    GAME_5GM_LTY(12, "5GM彩票",true),
-    GAME_VIRTUAL_SPORT(16, "虚拟体育",false),
-    GAME_IM_PP(17, "PP电子",true),
-    GAME_IM_ESPORT(18, "IM电竞",true),
-    GAME_IM_SW(19, "双赢彩票",true),
-    GAME_VR(20, "VR竞速娱乐",false),
-    GAME_MW(23, "MW游戏",true),
-    GAME_XYQP(24, "幸运棋牌",false),
+    GAME_AG(1, "AG游戏", true),
+    GAME_EBET(2, "EBET游戏", true),
+    GAME_BBIN(3, "BBIN游戏", false),
+    GAME_PT(4, "PT游戏", true),
+    GAME_MG(5, "MG游戏", false),
+    GAME_GG(6, "GG游戏", false),
+    GAME_188(7, "贝博体育", true),
+    GAME_LB(8, "LB彩票", true),
+    GAME_KY(9, "开元棋牌", false),
+    GAME_HLQP(10, "欢乐棋牌", true),
+    GAME_GMQP(11, "GM棋牌", true),
+    GAME_188_LIVE(13, "小金真人", true),
+    GAME_5GM_LTY(12, "5GM彩票", true),
+    GAME_VIRTUAL_SPORT(16, "虚拟体育", false),
+    GAME_IM_PP(17, "PP电子", true),
+    GAME_IM_ESPORT(18, "IM电竞", true),
+    GAME_IM_SW(19, "双赢彩票", true),
+    GAME_VR(20, "VR竞速娱乐", false),
+    GAME_MW(23, "MW游戏", true),
+    GAME_XYQP(24, "幸运棋牌", false),
     ;
 
     public static final int CHANNEL_AG = 1;
@@ -78,22 +78,10 @@ public enum GameChannelCode {
     private String code;
     private boolean isOpen;
 
-    GameChannelCode(int channel, String code,boolean isOpen) {
+    GameChannelCode(int channel, String code, boolean isOpen) {
         this.channel = channel;
         this.code = code;
         this.isOpen = isOpen;
-    }
-
-    public int getChannel() {
-        return channel;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public boolean isOpen() {
-        return isOpen;
     }
 
     public static String convertChannelName(Integer channel) {
@@ -131,25 +119,25 @@ public enum GameChannelCode {
             return "5GM彩票";
         } else if (channel == GameChannelCode.GAME_188_LIVE.getChannel()) {
             return "小金真人";
-        }else if (channel == GameChannelCode.GAME_VIRTUAL_SPORT.getChannel()) {
+        } else if (channel == GameChannelCode.GAME_VIRTUAL_SPORT.getChannel()) {
             return "虚拟体育";
         } else if (channel == GameChannelCode.GAME_IM_PP.getChannel()) {
             return "PP电子";
-        }else if (channel == GameChannelCode.GAME_IM_ESPORT.getChannel()) {
+        } else if (channel == GameChannelCode.GAME_IM_ESPORT.getChannel()) {
             return "IM电竞";
-        }else if (channel == GameChannelCode.GAME_IM_SW.getChannel()) {
+        } else if (channel == GameChannelCode.GAME_IM_SW.getChannel()) {
             return "双赢彩票";
-        }else if (channel == GameChannelCode.GAME_VR.getChannel()) {
+        } else if (channel == GameChannelCode.GAME_VR.getChannel()) {
             return "VR竞速娱乐";
-        }else if (channel == GameChannelCode.GAME_MW.getChannel()) {
+        } else if (channel == GameChannelCode.GAME_MW.getChannel()) {
             return "MW游戏";
-        }else if (channel == GameChannelCode.GAME_XYQP.getChannel()) {
+        } else if (channel == GameChannelCode.GAME_XYQP.getChannel()) {
             return "幸运棋牌";
         }
         return "";
     }
 
-    public static List<GameChannelCode> getGameChannelCodeList(){
+    public static List<GameChannelCode> getGameChannelCodeList() {
         return new ArrayList<GameChannelCode>(Arrays.asList(GameChannelCode.values()));
     }
 
@@ -163,6 +151,18 @@ public enum GameChannelCode {
                 GameChannelCode.FIVE_GM_LTY,
                 GameChannelCode.CHANNEL_IM_ESPORT
         );
+    }
+
+    public int getChannel() {
+        return channel;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public boolean isOpen() {
+        return isOpen;
     }
 
 }

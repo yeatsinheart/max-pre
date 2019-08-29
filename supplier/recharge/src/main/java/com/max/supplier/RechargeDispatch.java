@@ -5,11 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class RechargeDispatch {
     @Autowired
-    private HashMap<String, RechargeService> rechargeServiceHashMap;
+    private Map<String, RechargeService> rechargeServiceHashMap;
 
     public RechargeService getGameServiceBySupplierId(String key) {
         //todo 选择器key值选择到相应的服务

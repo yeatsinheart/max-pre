@@ -11,8 +11,9 @@ import org.springframework.stereotype.Component;
 public class SigninEventHandleSaveInRedis implements SigninEventHandle {
     @Autowired
     private RedisService redisService;
-    public void handle(UserDto user){
-        redisService.set(RedisKeyHelper.TOKEN_ONLINE , user, UserConstant.USER_REDIS_KEEP_TIME);
+
+    public void handle(UserDto user) {
+        redisService.set(RedisKeyHelper.TOKEN_ONLINE, user, UserConstant.USER_REDIS_KEEP_TIME);
         redisService.set(RedisKeyHelper.USER_ONLINE + user.getId().toString(), user, UserConstant.USER_REDIS_KEEP_TIME);
     }
 }

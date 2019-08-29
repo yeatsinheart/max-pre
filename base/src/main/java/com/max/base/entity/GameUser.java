@@ -13,7 +13,7 @@ import java.io.Serializable;
  * 游戏角色信息
  *
  * @author zane
- * @since 2019-08-28
+ * @since 2019-08-29
  */
 @Data
 @ApiModel(value = "GameUser对象", description = "游戏角色信息")
@@ -26,7 +26,7 @@ public class GameUser implements Serializable {
     private Integer gameUserId;
 
     @ApiModelProperty(value = "用户ID")
-    private String userId;
+    private Integer userId;
 
     @ApiModelProperty(value = "服务提供客户名")
     private String gameUserName;
@@ -36,6 +36,7 @@ public class GameUser implements Serializable {
 
     @ApiModelProperty(value = "余额")
     private String gameBalance;
+
     @ApiModelProperty(value = "服务提供ID")
     private Integer supplierId;
 

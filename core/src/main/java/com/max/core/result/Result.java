@@ -7,36 +7,33 @@ import java.io.Serializable;
 /**
  * 统一API响应结果封装
  */
-public class Result implements Serializable{
+public class Result<T> implements Serializable {
     private int code;
     private String message;
-    private Object data;
+    private T data;
 
-    public Result(){
+    public Result() {
     }
 
     public Result(ResultCode resultCode) {
         this.code = resultCode.getCode();
-        this.message=resultCode.getMessage();
+        this.message = resultCode.getMessage();
     }
 
-    public Result(ResultCode resultCode,Object data) {
+    public Result(ResultCode resultCode, T data) {
         this.code = resultCode.getCode();
-        this.message=resultCode.getMessage();
-        this.data=data;
-    }
-
-
-
-
-    public Result setCode(ResultCode resultCode) {
-        this.code = resultCode.getCode();
-        this.message=resultCode.getMessage();
-        return this;
+        this.message = resultCode.getMessage();
+        this.data = data;
     }
 
     public int getCode() {
         return code;
+    }
+
+    public Result setCode(ResultCode resultCode) {
+        this.code = resultCode.getCode();
+        this.message = resultCode.getMessage();
+        return this;
     }
 
     public Result setCode(int code) {
@@ -57,7 +54,7 @@ public class Result implements Serializable{
         return data;
     }
 
-    public Result setData(Object data) {
+    public Result<T> setData(T data) {
         this.data = data;
         return this;
     }

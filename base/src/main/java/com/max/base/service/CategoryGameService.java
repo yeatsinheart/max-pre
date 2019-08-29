@@ -7,7 +7,7 @@ import com.max.base.entity.CategoryGame;
  * 分类 服务类
  *
  * @author zane
- * @since 2019-08-28
+ * @since 2019-08-29
  */
 public interface CategoryGameService extends IService<CategoryGame> {
 

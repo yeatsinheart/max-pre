@@ -6,12 +6,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@MapperScan(basePackages={"com.max.*.mapper"})
+@MapperScan(basePackages = {"com.max.*.mapper"})
 @ComponentScan(basePackages = {
         "com.max.client",
         "com.max.base",
         "com.max.core",
-        "com.max.event"})
+        "com.max.supplier",
+        "com.max.transaction",
+        "com.max.event"
+})
 public class ClientApplication {
     public static void main(String[] args) {
         SpringApplication.run(ClientApplication.class, args);

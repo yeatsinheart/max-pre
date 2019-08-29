@@ -9,21 +9,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+//todo 游戏界面视图 及 功能
 public class GameController {
     @Autowired
     private RedisService redisService;
     //@Autowired
     //private GameViewService gameViewrService;
     //@Autowired
-   // private GameItemViewService gameItemViewrService;
+    // private GameItemViewService gameItemViewrService;
 
 
-
-    /**todo item-游戏  行为 ID 默认*/
     @ApiOperation(value = "/game", tags = {"游戏视图"})
     @PostMapping("/game")
     public Result game() {
-       //List<GameItemViewDto> viewDtos =  gameItemViewrService.game();
+        //List<GameItemViewDto> viewDtos =  gameItemViewrService.game();
         return ResultGenerator.genSuccessResult(null);
     }
     /*额度转入游戏*//*

@@ -16,28 +16,23 @@ import java.util.Date;
  * Created by Jimersy Lee
  */
 public class ProjectVerifyUtils {
-    private static final Logger logger = LoggerFactory.getLogger(ProjectVerifyUtils.class);
-
     /**
      * 正则表达式 数字+英文字母
      */
     public static final String REGX_ALPHABETA_NUM = "^[a-zA-Z0-9]$";
-
     /**
      * 中国大陆手机号
      */
     public static final String REGX_CN_MOBILE = "^(0086|[+]86)?1\\d{10}";
-
     /**
      * 邮编
      */
     public static final String REGEX_POSTCODE = "^[0-9]{6}$";
-
     /**
      * 用于校验 0, 1
      */
     public static final String PEGEX_YES_OR_NO = "^[0-1]{1}$";
-
+    private static final Logger logger = LoggerFactory.getLogger(ProjectVerifyUtils.class);
 
     public static boolean verifyPhoneNo(String phoneNo, boolean throwException, String fieldName) throws ServiceException {
         notNull(phoneNo, fieldName, true);

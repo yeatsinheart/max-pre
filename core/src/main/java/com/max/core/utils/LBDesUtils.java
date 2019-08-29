@@ -29,15 +29,16 @@ public class LBDesUtils {
         }
         return encryptedString;
     }
-    public static byte[] getMd5(String keyString){
-        byte[] rawKey=new byte[24];
-        try{
-            MessageDigest messageDigest=MessageDigest.getInstance("MD5");
-            messageDigest.update(keyString.getBytes("UTF-8"),0,keyString.length());
-            byte[] md5=messageDigest.digest();
-            System.arraycopy(md5,0,rawKey,0,16);
-            System.arraycopy(md5,0,rawKey,16,8);
-        }catch (Exception e){
+
+    public static byte[] getMd5(String keyString) {
+        byte[] rawKey = new byte[24];
+        try {
+            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+            messageDigest.update(keyString.getBytes("UTF-8"), 0, keyString.length());
+            byte[] md5 = messageDigest.digest();
+            System.arraycopy(md5, 0, rawKey, 0, 16);
+            System.arraycopy(md5, 0, rawKey, 16, 8);
+        } catch (Exception e) {
             log.error(String.valueOf(e));
         }
         return rawKey;

@@ -14,10 +14,9 @@ import java.util.Date;
 @Slf4j
 @Component("tokenValidateUtils")
 public class TokenValidateUtils {
+    private final static String LOGIN_KEY = "max2019#";
     @Resource
     private RedisService redisService;
-
-    private final static String LOGIN_KEY = "max2019#";
 
     public boolean validationToken(String uid, String clientType, String appType, String token) {
         String deToken = null;
