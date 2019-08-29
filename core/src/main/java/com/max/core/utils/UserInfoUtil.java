@@ -33,15 +33,6 @@ public class UserInfoUtil {
     }
 
     /**
-     * 用户token缓存
-     */
-    public static void continueToken(String token, Integer userId) {
-        //增加缓存时间 10分鐘
-        redisService.set(RedisKeyHelper.TOKEN_ONLINE + token, userId, RedisConstant.USER_KEEP_TIME);
-        redisService.set(RedisKeyHelper.USER_ONLINE + userId, token, RedisConstant.USER_KEEP_TIME);
-    }
-
-    /**
      * 用户token踢下线
      */
     public static boolean knicked(String token) {

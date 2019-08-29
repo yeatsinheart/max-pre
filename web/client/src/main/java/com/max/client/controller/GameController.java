@@ -22,6 +22,11 @@ public class GameController {
     @ApiOperation(value = "/game", tags = {"游戏视图"})
     @PostMapping("/game")
     public Result game() {
+        /*
+        * SELECT  * FROM category_game a
+        LEFT JOIN relation_category_view b ON a.id = b.category_id
+        LEFT JOIN view c ON b.view_id = c.view_id AND c.view_type = 1 AND c.status = 0
+        * */
         //List<GameItemViewDto> viewDtos =  gameItemViewrService.game();
         return ResultGenerator.genSuccessResult(null);
     }

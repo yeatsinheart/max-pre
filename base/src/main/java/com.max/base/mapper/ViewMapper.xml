@@ -4,54 +4,54 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="ViewResultMap" type="com.max.base.entity.View">
-        <id column="view_id" property="viewId"/>
-        <result column="view_type" property="viewType"/>
-        <result column="view_title" property="viewTitle"/>
-        <result column="view_title_type" property="viewTitleType"/>
-        <result column="view_content" property="viewContent"/>
-        <result column="view_content_type" property="viewContentType"/>
-        <result column="view_jump" property="viewJump"/>
-        <result column="view_jump_type" property="viewJumpType"/>
-        <result column="view_topping" property="viewTopping"/>
-        <result column="view_order" property="viewOrder"/>
-        <result column="view_status" property="viewStatus"/>
-        <result column="create_time" property="createTime"/>
-        <result column="update_time" property="updateTime"/>
+        <id column="id" property="id" />
+        <result column="type" property="type" />
+        <result column="title" property="title" />
+        <result column="title_type" property="titleType" />
+        <result column="content" property="content" />
+        <result column="content_type" property="contentType" />
+        <result column="action" property="action" />
+        <result column="action_type" property="actionType" />
+        <result column="topping" property="topping" />
+        <result column="order" property="order" />
+        <result column="status" property="status" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
     </resultMap>
     <resultMap id="ViewDtoResultMap" type="com.max.base.dto.ViewDto">
-        <id column="view_id" property="viewId"/>
-        <result column="view_type" property="viewType"/>
-        <result column="view_title" property="viewTitle"/>
-        <result column="view_title_type" property="viewTitleType"/>
-        <result column="view_content" property="viewContent"/>
-        <result column="view_content_type" property="viewContentType"/>
-        <result column="view_jump" property="viewJump"/>
-        <result column="view_jump_type" property="viewJumpType"/>
-        <result column="view_topping" property="viewTopping"/>
-        <result column="view_order" property="viewOrder"/>
-        <result column="view_status" property="viewStatus"/>
-        <result column="create_time" property="createTime"/>
-        <result column="update_time" property="updateTime"/>
+                <id column="id" property="id" />
+                <result column="type" property="type" />
+                <result column="title" property="title" />
+                <result column="title_type" property="titleType" />
+                <result column="content" property="content" />
+                <result column="content_type" property="contentType" />
+                <result column="action" property="action" />
+                <result column="action_type" property="actionType" />
+                <result column="topping" property="topping" />
+                <result column="order" property="order" />
+                <result column="status" property="status" />
+                <result column="create_time" property="createTime" />
+                <result column="update_time" property="updateTime" />
     </resultMap>
     <resultMap id="ViewResponseDtoResultMap" type="com.max.base.dto.response.ViewResponseDto">
-        <id column="view_id" property="viewId"/>
-        <result column="view_type" property="viewType"/>
-        <result column="view_title" property="viewTitle"/>
-        <result column="view_title_type" property="viewTitleType"/>
-        <result column="view_content" property="viewContent"/>
-        <result column="view_content_type" property="viewContentType"/>
-        <result column="view_jump" property="viewJump"/>
-        <result column="view_jump_type" property="viewJumpType"/>
-        <result column="view_topping" property="viewTopping"/>
-        <result column="view_order" property="viewOrder"/>
-        <result column="view_status" property="viewStatus"/>
-        <result column="create_time" property="createTime"/>
-        <result column="update_time" property="updateTime"/>
+                <id column="id" property="id" />
+                <result column="type" property="type" />
+                <result column="title" property="title" />
+                <result column="title_type" property="titleType" />
+                <result column="content" property="content" />
+                <result column="content_type" property="contentType" />
+                <result column="action" property="action" />
+                <result column="action_type" property="actionType" />
+                <result column="topping" property="topping" />
+                <result column="order" property="order" />
+                <result column="status" property="status" />
+                <result column="create_time" property="createTime" />
+                <result column="update_time" property="updateTime" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        view_id, view_type, view_title, view_title_type, view_content, view_content_type, view_jump, view_jump_type, view_topping, view_order, view_status, create_time, update_time
+        id, type, title, title_type, content, content_type, action, action_type, topping, order, status, create_time, update_time
     </sql>
 
 </mapper>
