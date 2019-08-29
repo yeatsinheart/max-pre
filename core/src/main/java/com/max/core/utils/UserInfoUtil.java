@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 //todo 用户登录后信息工具
+//todo 用户黑名单
+//todo 虚假用户
 
 /**
  * token信息
