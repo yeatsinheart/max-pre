@@ -15,6 +15,7 @@
         <module>event</module>
         <module>core</module>
         <module>transaction</module>
+        <module>test</module>
     </modules>
     <dependencies>
 

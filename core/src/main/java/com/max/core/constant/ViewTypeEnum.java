@@ -6,7 +6,9 @@ public enum ViewTypeEnum {
     ALERT(3,"弹窗"),
     GAME(4,"游戏"),
     ACTIVITY(5,"活动"),
-    RECHARGE(6,"充值方式");
+    RECHARGE(6,"充值方式"),
+
+    GAME_CATOGERY(7,"游戏分类");
     ViewTypeEnum(int code, String value) {
         this.code = code;
         this.value = value;
