@@ -17,11 +17,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
+
 /**
- *
  * 订单流程一定要控制好
  * //todo 订单流程异常状态要分析好
- * */
+ */
 @Service
 public class OrderTransactionalServiceImpl implements OrderTransactionalService {
     @Autowired
@@ -48,7 +48,7 @@ public class OrderTransactionalServiceImpl implements OrderTransactionalService 
         order.setPayer(request.getPayer());
         order.setReceiver(request.getReceiver());
         order.setProcess(WalletOrderProcessEnum.getProcessOfStart(request.getType()).getCode());
-        order.setTryNum(0);
+        order.setTryNum(1);
         order.setFailMsg(null);
         order.setCreateTime(LocalDateTime.now());
         order.setUpdateTime(LocalDateTime.now());
@@ -57,23 +57,25 @@ public class OrderTransactionalServiceImpl implements OrderTransactionalService 
         WalletMoneyChangeRequest changeRequest = new WalletMoneyChangeRequest();
         changeRequest.setUserId(request.getUserId());
         changeRequest.setMoney(request.getMoney().abs());
-        //扣钱操作 账户钱足够
-        if (WalletOrderTypeEnum.subtractMoney2Wallet(request.getType())
-                && walletTransactionalService.findMoney(changeRequest).compareTo(request.getMoney()) != -1) {
-            //先扣钱 再创建订单
+        //扣钱订单 先扣钱
+        if (WalletOrderTypeEnum.subtractMoney2Wallet(request.getType())) {
+            //账户钱小于要扣得钱
+            if (walletTransactionalService.findMoney(changeRequest).compareTo(request.getMoney()) == -1) {
+                throw new ServiceException("账户余额不足");
+            }
+            //账户够钱  先扣钱
             boolean success = walletTransactionalService.minusMoney(changeRequest);
             if (!success) {
                 throw new ServiceException("钱包扣钱失败");
-            } else {
-                boolean orderIsCreated = walletOrderService.save(order);
-                if (!orderIsCreated) {
-                    throw new ServiceException("订单创建失败");
-
-                }
-                return order;
             }
         }
-        throw new ServiceException("账户余额不足");
+        //创建订单
+        boolean orderIsCreated = walletOrderService.save(order);
+        if (!orderIsCreated) {
+            throw new ServiceException("订单创建失败");
+        }
+        return order;
+
     }
 
     /**
@@ -85,46 +87,29 @@ public class OrderTransactionalServiceImpl implements OrderTransactionalService 
      */
     @Override
     public boolean nextProcess(WalletOrder order) {
-        order.setProcess(WalletOrderProcessEnum.nextProcess(order.getProcess(), order.getProcessResult()).getCode());
+        WalletOrderProcessEnum.OrderProcessEnum process = WalletOrderProcessEnum.nextProcess(order.getProcess(), order.getProcessResult());
+        order.setProcess(process.getCode());
         order.setProcessResult(WalletOrderProcessEnum.OrderProcessResultEnum.WAITING.getCode());
-        order.setTryNum(0);
+        order.setTryNum(1);
         order.setFailMsg(null);
         order.setUpdateTime(LocalDateTime.now());
         UpdateWrapper<WalletOrder> updateWrapper = new UpdateWrapper<>();
         updateWrapper.eq("order_id", order.getOrderId());
         boolean success = walletOrderService.update(order, updateWrapper);
-        return success;
-    }
-
-    /**
-     * 失败 : 拒绝  撤销
-     * 如果next是成功,同步钱包操作,+增加钱,-直接成功
-     * 如果next是撤销/失败操作，+完成，-钱包加金额
-     *
-     * @param order
-     */
-    @Override
-    public boolean fail(WalletOrder order, String failMsg) {
-        order.setProcess(WalletOrderProcessEnum.OrderProcessEnum.FAIL.getCode());
-        order.setProcessResult(WalletOrderProcessEnum.OrderProcessResultEnum.WAITING.getCode());
-        order.setTryNum(0);
-        order.setFailMsg(failMsg);
-        order.setUpdateTime(LocalDateTime.now());
-        UpdateWrapper<WalletOrder> updateWrapper = new UpdateWrapper<>();
-        updateWrapper.eq("order_id", order.getOrderId());
-        boolean success = walletOrderService.update(order, updateWrapper);
+        //扣钱订单 恢复钱
         WalletMoneyChangeRequest changeRequest = new WalletMoneyChangeRequest();
         changeRequest.setUserId(order.getUserId());
         changeRequest.setMoney(MoneyUtil.toBigDecimalMoney(order.getMoney()).abs());
-        //扣钱单子
-        if (success && WalletOrderTypeEnum.subtractMoney2Wallet(order.getType())) {
-            //先扣钱 再创建订单
-            boolean recoverySuccess = walletTransactionalService.addMoney(changeRequest);
-            if (!recoverySuccess) {
-                throw new ServiceException("钱包恢复失败");
+        if (success) {
+            if (WalletOrderTypeEnum.subtractMoney2Wallet(order.getType())) {
+                //恢复钱
+                boolean recoverySuccess = walletTransactionalService.addMoney(changeRequest);
+                if (!recoverySuccess) {
+                    
+                    throw new ServiceException("钱包恢复失败,订单未顺利进入下一环节！");
+                }
             }
         }
         return success;
     }
-
 }

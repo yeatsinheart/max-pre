@@ -56,7 +56,7 @@ public class TestGameService implements GameService {
      */
     @Override
     public BigDecimal balance(GameUser balanceRequest) {
-        return null;
+        return BigDecimal.ZERO;
     }
 
     /**

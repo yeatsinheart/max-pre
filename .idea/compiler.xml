@@ -7,7 +7,6 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="transaction" />
         <module name="widthdraw" />
         <module name="event" />
         <module name="order" />
@@ -15,9 +14,10 @@
         <module name="game" />
         <module name="sms" />
         <module name="core" />
-        <module name="activity" />
-        <module name="server" />
+        <module name="transaction" />
         <module name="recharge" />
+        <module name="server" />
+        <module name="activity" />
         <module name="client" />
       </profile>
     </annotationProcessing>

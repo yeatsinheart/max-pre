@@ -58,6 +58,7 @@ public class WalletTransactionalServiceImpl implements WalletTransactionalServic
         UpdateWrapper<User> userUpdateWrapper = new UpdateWrapper<>();
         userUpdateWrapper.eq("id", user.getId());
         userService.update(changeMoney, userUpdateWrapper);
+
         return true;
     }
 
@@ -84,6 +85,7 @@ public class WalletTransactionalServiceImpl implements WalletTransactionalServic
         UpdateWrapper<User> userUpdateWrapper = new UpdateWrapper<>();
         userUpdateWrapper.eq("id", user.getId());
         userService.update(changeMoney, userUpdateWrapper);
+        //扣钱事件
         return true;
     }
 }

@@ -27,7 +27,12 @@ public enum WalletOrderProcessEnum {
      * 最后支付操作确认完成
      */
     THREE(OrderProcessEnum.OPERATION.getCode(), OrderProcessResultEnum.SURE.getCode(), OrderProcessEnum.FINISH),
-    THREE_FAIL(OrderProcessEnum.OPERATION.getCode(), OrderProcessResultEnum.FAIL.getCode(), OrderProcessEnum.FAIL);
+    THREE_FAIL(OrderProcessEnum.OPERATION.getCode(), OrderProcessResultEnum.FAIL.getCode(), OrderProcessEnum.FAIL),
+
+    /**
+     * 最后支付操作确认完成
+     */
+    CANCEL(OrderProcessEnum.CANCEL.getCode(), OrderProcessResultEnum.WAITING.getCode(), OrderProcessEnum.FAIL);
 
     private int process;
     private int result;
@@ -84,10 +89,18 @@ public enum WalletOrderProcessEnum {
         //todo 流程是人工操作还是系统自动操作。
         //todo 默认都是人工，修改状态
         //todo 修改状态，如果操作失败，是否会有重试？自动操作两次？还是自循环到成功？
+        /*订单正常过程*/
         SUBMIT(0, "提交订单"),
         FENGKONG(10, "风控审核"),
         CAIWU(20, "财务审核"),
         OPERATION(30, "三方确认失败/财务出款失败"),
+
+        /*人工撤销*/
+        CANCEL(97, "人工撤单"),
+
+
+
+        /*最终状态*/
         FINISH(88, "成功结束"),
         FAIL(98, "失败"),
         NULL(99, "未知流程");

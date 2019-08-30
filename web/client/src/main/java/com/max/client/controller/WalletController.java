@@ -1,6 +1,5 @@
 package com.max.client.controller;
 
-
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -14,6 +13,7 @@ import com.max.base.service.GameUserService;
 import com.max.base.service.LogBankService;
 import com.max.base.service.UserService;
 import com.max.base.service.WalletOrderService;
+import com.max.core.constant.PayWayEnum;
 import com.max.core.constant.WalletOrderProcessEnum;
 import com.max.core.constant.WalletOrderTypeEnum;
 import com.max.core.exception.ServiceException;
@@ -27,6 +27,8 @@ import com.max.core.utils.MoneyUtil;
 import com.max.supplier.GameDispatch;
 import com.max.supplier.dto.GameTransferOutDto;
 import com.max.supplier.service.GameService;
+import com.max.transaction.dto.OrderCreateRequest;
+import com.max.transaction.service.OrderTransactionalService;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,20 +39,25 @@ import org.springframework.web.bind.annotation.RestController;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Vector;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @RestController
 public class WalletController {
+    ExecutorService executor = Executors.newFixedThreadPool(10);
     @Autowired
     private LogBankService logBankService;
     @Autowired
     private WalletOrderService walletOrderService;
+    @Autowired
+    private OrderTransactionalService orderTransactionalService;
     @Autowired
     private UserService userService;
     @Autowired
     private GameUserService gameUserService;
     @Autowired
     private RedisService redisService;
-    //@Autowired
+    @Autowired
     private GameDispatch gameDispatch;
 
     /*绑定银行卡*/
@@ -89,17 +96,29 @@ public class WalletController {
             //查询各个游戏账户余额，并归集到钱包，所有都成功
             QueryWrapper<GameUser> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("user_id", userInDb.getId());
+            //获取该用户的所有游戏账号
             List<GameUser> gameUsers = gameUserService.list(queryWrapper);
             //查询钱包余额
+            //todo 添加多线程
+            //List<Future<T>> futuresList = new ArrayList<>();
             Vector<BigDecimal> wallets = new Vector<>();
+            //遍历游戏账号 获取相应的金额
+            //todo 需要 多线程 生成游戏转出订单 确认是否有提供转出所有的功能
             gameUsers.parallelStream().forEach(supplier -> {
+                //获取提供商服务
                 GameService gameService = gameDispatch.getGameServiceBySupplierId(supplier.getSupplierId().toString());
-
                 BigDecimal money = gameService.balance(supplier);
                 GameTransferOutDto transferOut = new GameTransferOutDto();
-                //需要生成转出订单
                 transferOut.setMoney(money);
                 transferOut.setUser(supplier);
+                OrderCreateRequest create = new OrderCreateRequest();
+                create.setUserId(supplier.getUserId());
+                create.setType(WalletOrderTypeEnum.TRANSFER_OUT.getCode());
+                create.setPayWay(PayWayEnum.GAME_TRANSFER.getCode());
+                create.setMoney(money);
+                create.setPayer(supplier.getSupplierId().toString());
+                create.setReceiver(supplier.getUserId().toString());
+                WalletOrder order = orderTransactionalService.createOrder(create);
                 wallets.add(money);
             });
 
@@ -108,7 +127,7 @@ public class WalletController {
         throw new ServiceException(ResultCode.KICKED_OUT);
     }
 
-    /*我的余额//todo 游戏钱包资金查询*/
+    /*我的余额*/
     @ApiOperation(value = "/money", tags = {"我的余额：不归并"})
     @PostMapping("/money")
     public Result money(@RequestHeader String token) {
@@ -124,12 +143,13 @@ public class WalletController {
             gameUsers.parallelStream().forEach(supplier -> {
                 GameService gameService = gameDispatch.getGameServiceBySupplierId(supplier.getSupplierId().toString());
                 BigDecimal money = BigDecimal.ZERO;
-                 money = gameService.balance(supplier);
+                money = gameService.balance(supplier);
                 supplier.setGameBalance(MoneyUtil.toStringMoney(money));
                 supplier.setGameUserName(null);
                 supplier.setGameUserPasswd(null);
                 wallets.add(supplier);
             });
+            //todo 玩家账号余额 list 封装成页面的 钱包《游戏，余额》
             return null;
         }
         throw new ServiceException(ResultCode.KICKED_OUT);

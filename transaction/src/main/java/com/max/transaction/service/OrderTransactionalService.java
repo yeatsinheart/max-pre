@@ -20,11 +20,4 @@ public interface OrderTransactionalService {
      */
     boolean nextProcess(WalletOrder order);
 
-    /**
-     * 失败 : 拒绝  撤销
-     * 如果next是成功,同步钱包操作,+增加钱,-直接成功
-     * 如果next是撤销/失败操作，+完成，-钱包加金额
-     */
-    boolean fail(WalletOrder order,String failMsg);
-
 }
