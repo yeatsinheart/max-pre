@@ -7,20 +7,25 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="test" />
+        <module name="client" />
+        <module name="activity" />
         <module name="widthdraw" />
-        <module name="event" />
+        <module name="tool" />
+        <module name="recharge" />
         <module name="order" />
-        <module name="message" />
-        <module name="game" />
+        <module name="event" />
+        <module name="server" />
         <module name="sms" />
         <module name="core" />
+        <module name="message" />
         <module name="transaction" />
-        <module name="recharge" />
-        <module name="server" />
-        <module name="activity" />
-        <module name="client" />
+        <module name="game" />
+        <module name="wallet" />
+        <module name="merchant" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="test" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

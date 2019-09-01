@@ -15,6 +15,7 @@
         <option value="$PROJECT_DIR$/base/base-api/base-service/pom.xml" />
         <option value="$PROJECT_DIR$/base/base-api/pom.xml" />
         <option value="$PROJECT_DIR$/base/base-service/pom.xml" />
+        <option value="$PROJECT_DIR$/test/pom.xml" />
       </set>
     </option>
   </component>

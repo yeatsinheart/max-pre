@@ -16,6 +16,9 @@
         <module>core</module>
         <module>transaction</module>
         <module>test</module>
+        <module>merchant</module>
+        <module>wallet</module>
+        <module>tool</module>
     </modules>
     <dependencies>
 
